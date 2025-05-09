@@ -1,21 +1,11 @@
-import { StyleSheet } from 'react-native';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Redirect } from 'expo-router';
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">Pockit</ThemedText>
-      <ThemedText>AI Powered Expense Tracker</ThemedText>
-    </ThemedView>
-  );
+const isAuthenticated = false;
+
+export default function Index() {
+  if (!isAuthenticated) {
+    return <Redirect href="/(unauthorized)" />;
+  }
+
+  return <Redirect href="/" />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-  },
-});
