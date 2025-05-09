@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "643973537125",
+    "project_id": "pockit-a2754",
+    "storage_bucket": "pockit-a2754.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643973537125:android:45964c738862b5ff56158c",
+        "android_client_info": {
+          "package_name": "com.anonymous.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA1DIuzVJpBhJDYg2kREFnFynFiFyyKgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
