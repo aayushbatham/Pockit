@@ -14,6 +14,7 @@ import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { useRouter } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Mock data service
 const mockUserData = [
@@ -99,6 +100,7 @@ export default function HomePage() {
   const [error, setError] = useState<string | null>(null);
 
   const colorScheme = useColorScheme();
+  const { t } = useLanguage();
   const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
 
   const backgroundColor = colorScheme === "dark" ? "#121212" : "#F8F9FA";
@@ -164,7 +166,7 @@ export default function HomePage() {
             { backgroundColor: colorScheme === "dark" ? "#2D2D2D" : "#F3F4F6" },
           ]}
         >
-          <ThemedText style={styles.accountText}>All account</ThemedText>
+          <ThemedText style={styles.accountText}>{t('home')}</ThemedText>
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
