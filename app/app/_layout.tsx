@@ -1,36 +1,88 @@
-import React from 'react';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack, Redirect } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useEffect } from "react";
+import { Tabs } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import * as Font from "expo-font";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 
-// Temporary auth state - replace with your actual auth logic
-const isAuthenticated = false;
-
-export default function RootLayout() {
+export default function Layout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+  const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
+  const primaryColor = "#8B5CF6";
 
-  if (!loaded) {
-    return null;
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    Font.loadAsync({
+      ...MaterialCommunityIcons.font,
+    }).then(() => setFontsLoaded(true));
+  }, []);
+
+  if (!fontsLoaded) {
+    return null; // or a loading spinner
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack screenOptions={{ headerShown: false }}>
-        {!isAuthenticated ? (
-          <>
-            <Stack.Screen name="(unauthorized)" />
-            <Stack.Screen name="index" redirect />
-          </>
-        ) : (
-          <Stack.Screen name="(tabs)" />
-        )}
-      </Stack>
+    <ThemeProvider value={theme}>
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarActiveTintColor: primaryColor,
+          tabBarInactiveTintColor:
+            colorScheme === "dark" ? "#666666" : "#999999",
+          tabBarStyle: {
+            backgroundColor: colorScheme === "dark" ? "#000000" : "#FFFFFF",
+            height: 60,
+            paddingBottom: 8,
+          },
+        }}
+      >
+        <Tabs.Screen
+          name="(home)"
+          options={{
+            title: "Home",
+            tabBarIcon: ({ color, focused }) => (
+              <MaterialCommunityIcons
+                name={focused ? "home" : "home-outline"}
+                size={24}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="(dashboard)"
+          options={{
+            title: "Dashboard",
+            tabBarIcon: ({ color, focused }) => (
+              <MaterialCommunityIcons
+                name={focused ? "chart-box" : "chart-box-outline"}
+                size={24}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="(profile)"
+          options={{
+            title: "Profile",
+            tabBarIcon: ({ color, focused }) => (
+              <MaterialCommunityIcons
+                name={focused ? "account" : "account-outline"}
+                size={24}
+                color={color}
+              />
+            ),
+          }}
+        />
+      </Tabs>
       <StatusBar style="auto" />
     </ThemeProvider>
   );
