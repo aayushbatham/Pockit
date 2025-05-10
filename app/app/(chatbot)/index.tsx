@@ -50,13 +50,11 @@ export default function ChatbotPage() {
     setIsLoading(true);
 
     try {
-      // Define the type for a text content block
       type TextContentBlock = {
         type: "text";
         text: string;
       };
 
-      // Type guard to check if a content block is of type 'text'
       function isTextBlock(block: any): block is TextContentBlock {
         return block.type === "text" && typeof block.text === "string";
       }
