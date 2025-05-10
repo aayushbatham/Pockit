@@ -63,7 +63,7 @@ const mockDataService = {
       setTimeout(() => {
         const randomIndex = Math.floor(Math.random() * mockUserData.length);
         resolve(mockUserData[randomIndex]);
-      }, 1000);
+      }, 0);
     });
   },
 };

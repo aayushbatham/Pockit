@@ -7,4 +7,4 @@ export default function UnauthorizedLayout() {
       <Stack.Screen name="sign-in" />
     </Stack>
   );
-} 
+}
