@@ -7,6 +7,7 @@ interface Transaction {
   amount: number;
   spentCategory: string;
   methodeOfPayment: string;
+  date: string;
   receiver: string;
   createdAt: string;
 }
@@ -15,7 +16,7 @@ async function fetchTransactions(): Promise<Transaction[]> {
   const auth = useAuth();
   const token = await auth.getToken();
 
-  const response = await fetch('http://localhost:8080/api/transactions', {
+  const response = await fetch('http://192.168.137.1:8080/api/transactions', {
     headers: {
       'Authorization': `Bearer ${token}`,
     },

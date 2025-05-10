@@ -19,6 +19,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LanguageProvider } from '@/contexts/LanguageContext';
 
 import { createContext } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 export const AuthContext = createContext({
   signIn: (token: string) => {},
   signOut: () => {},
@@ -82,6 +83,7 @@ export default function Layout() {
   }
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={authContext}>
         <LanguageProvider>
@@ -99,6 +101,7 @@ export default function Layout() {
         </LanguageProvider>
       </AuthContext.Provider>
     </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }
 

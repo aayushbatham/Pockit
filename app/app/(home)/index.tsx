@@ -15,6 +15,7 @@ import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { useRouter } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useGetTransactions } from '@/modules/hooks/use-get-transcations';
 
 // Mock data service
 const mockUserData = [
@@ -98,6 +99,7 @@ export default function HomePage() {
   const [userData, setUserData] = useState<UserData>(mockUserData[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { data: transactions, isLoading: transactionsLoading, error: transactionsError } = useGetTransactions();
 
   const colorScheme = useColorScheme();
   const { t } = useLanguage();
@@ -124,15 +126,10 @@ export default function HomePage() {
     };
 
     fetchUserData();
-    // Refresh data every 30 seconds
     const interval = setInterval(fetchUserData, 30000);
 
     return () => clearInterval(interval);
   }, []);
-
-  const handleChatPress = () => {
-    console.log("Chat button pressed");
-  };
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -223,7 +220,7 @@ export default function HomePage() {
           <ThemedText style={styles.insightTitle}>{t('aiInsight')}</ThemedText>
         </View>
         <ThemedText style={styles.insightText}>
-          Great job Rahul! You've saved 20% more than last month.
+          Great job! You've saved 20% more than last month.
         </ThemedText>
       </View>
 
@@ -235,41 +232,65 @@ export default function HomePage() {
           </Pressable>
         </View>
 
-        {/* Transaction Items */}
-        <TransactionItem
-          icon="food"
-          title="dinner"
-          amount="-$89.69"
-          time="Today, 12:30 AM"
-          type="expense"
-        />
-        <TransactionItem
-          icon="briefcase"
-          title="designProject"
-          amount="+$1500.00"
-          time="Yesterday, 08:10 AM"
-          type="income"
-        />
-        <TransactionItem
-          icon="medical-bag"
-          title="medicine"
-          amount="-$369.54"
-          time="Today, 12:30 AM"
-          type="expense"
-        />
+        {transactionsLoading ? (
+          <LoadingSpinner />
+        ) : transactionsError ? (
+          <ThemedText style={{ color: 'red', textAlign: 'center', padding: 16 }}>
+            Failed to load transactions
+          </ThemedText>
+        ) : (
+          transactions?.map((transaction) => (
+            <TransactionItem
+              key={transaction.id}
+              icon={getIconForCategory(transaction.spentCategory)}
+              title={transaction.spentCategory}
+              amount={`${transaction.amount < 0 ? '-' : '+'}₹${Math.abs(transaction.amount).toLocaleString()}`}
+              time={new Date(transaction.date).toLocaleString()}
+              type={transaction.amount < 0 ? 'expense' : 'income'}
+              receiver={transaction.receiver}
+            />
+          ))
+        )}
       </View>
     </ScrollView>
   );
 }
 
-// New Transaction Item Component
-function TransactionItem({ icon, title, amount, time, type }: any) {
+function getIconForCategory(category: string): string {
+  const categoryIcons: Record<string, string> = {
+    'Food': 'food',
+    'Travel': 'airplane',
+    'Shopping': 'shopping',
+    'Entertainment': 'movie',
+    'Health': 'medical-bag',
+    'Bills': 'file-document',
+    'Salary': 'briefcase',
+    'Transfer': 'bank-transfer',
+  };
+
+  return categoryIcons[category] || 'cash';
+}
+
+function TransactionItem({ icon, title, amount, time, type, receiver }: {
+  icon: string;
+  title: string;
+  amount: string;
+  time: string;
+  type: 'expense' | 'income';
+  receiver?: string;
+}) {
   const colorScheme = useColorScheme();
   const { t } = useLanguage();
   const iconBgColors = {
     food: "#FF6B6B",
     briefcase: "#4ECDC4",
     "medical-bag": "#45B7D1",
+    shopping: "#FFA94D",
+    airplane: "#845EF7",
+    movie: "#FF922B",
+    "file-document": "#5C7CFA",
+    "bank-transfer": "#20C997",
+    cash: "#7950F2",
   };
 
   // Convert time string to use translations
@@ -287,13 +308,16 @@ function TransactionItem({ icon, title, amount, time, type }: any) {
       <View
         style={[
           styles.transactionIcon,
-          { backgroundColor: iconBgColors[icon as keyof typeof iconBgColors] },
+          { backgroundColor: iconBgColors[icon as keyof typeof iconBgColors] || "#7950F2" },
         ]}
       >
-        <MaterialCommunityIcons name={icon} size={24} color="white" />
+        <MaterialCommunityIcons name={icon as any} size={24} color="white" />
       </View>
       <View style={styles.transactionInfo}>
         <ThemedText style={styles.transactionTitle}>{translatedTitle}</ThemedText>
+        {receiver && (
+          <ThemedText style={styles.transactionReceiver}>{receiver}</ThemedText>
+        )}
         <ThemedText style={styles.transactionTime}>{timeText}</ThemedText>
       </View>
       <ThemedText
@@ -314,6 +338,11 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingBottom: 40,
+  },
+  transactionReceiver: {
+    fontSize: 12,
+    opacity: 0.7,
+    marginTop: 2,
   },
   topBar: {
     flexDirection: "row",
