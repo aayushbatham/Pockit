@@ -33,7 +33,7 @@ export default function ChatbotPage() {
   const primaryColor = "#8B5CF6";
 
   const ai = new Anthropic({
-    apiKey: process.env.ANTHROPICKEY, // Replace with your actual Anthropic API key
+    apiKey: "", // Replace with your actual Anthropic API key
   });
 
   const handleSend = async () => {
