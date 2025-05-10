@@ -3,6 +3,7 @@ package com.server.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,7 +34,11 @@ public class SecurityConfig {
                     return config;
                 }))
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/api/auth/**").permitAll(); // Use pattern matching
+                    auth.requestMatchers(
+                        "/api/auth/register", 
+                        "/api/auth/login",
+                        "/api/transactions/**"
+                    ).permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

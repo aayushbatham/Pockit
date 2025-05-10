@@ -1,11 +1,12 @@
 package com.server.model;
 
-import lombok.*;
-import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.Date;
+import org.springframework.data.annotation.CreatedDate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
@@ -14,11 +15,13 @@ import java.util.Date;
 public class Transaction {
     @Id
     private String id;
-    private String userId;
+    private String phoneNumber;
     private Double amount;
-    private String typeOfTransaction;
     private String spentCategory;
-    private Date date;
+    
+    @CreatedDate
+    private LocalDateTime date = LocalDateTime.now();  // Set default value
+    
     private String methodeOfPayment;
-    private String merchant;
+    private String receiver;
 }
