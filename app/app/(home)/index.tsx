@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, StyleSheet, Pressable, Platform } from "react-native";
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Pressable,
+  Platform,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { DarkTheme, DefaultTheme } from "@react-navigation/native";
-import { LoadingSpinner } from '@/components/LoadingSpinner';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { useRouter } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // Mock data service
 const mockUserData = [
@@ -86,6 +93,7 @@ interface UserData {
 }
 
 export default function HomePage() {
+  const router = useRouter();
   const [userData, setUserData] = useState<UserData>(mockUserData[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -142,7 +150,7 @@ export default function HomePage() {
   }
 
   return (
-    <ScrollView 
+    <ScrollView
       style={[styles.container, { backgroundColor }]}
       contentContainerStyle={styles.contentContainer}
     >
@@ -150,18 +158,33 @@ export default function HomePage() {
         <Pressable style={styles.iconButton}>
           <MaterialCommunityIcons name="apps" size={24} color={textColor} />
         </Pressable>
-        <Pressable style={[styles.accountSelector, { backgroundColor: colorScheme === "dark" ? "#2D2D2D" : "#F3F4F6" }]}>
+        <Pressable
+          style={[
+            styles.accountSelector,
+            { backgroundColor: colorScheme === "dark" ? "#2D2D2D" : "#F3F4F6" },
+          ]}
+        >
           <ThemedText style={styles.accountText}>All account</ThemedText>
-          <MaterialCommunityIcons name="chevron-down" size={20} color={textColor} />
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={20}
+            color={textColor}
+          />
         </Pressable>
         <Pressable style={styles.iconButton}>
-          <MaterialCommunityIcons name="bell-outline" size={24} color={textColor} />
+          <MaterialCommunityIcons
+            name="bell-outline"
+            size={24}
+            color={textColor}
+          />
         </Pressable>
       </View>
 
       <View style={styles.balanceSection}>
         <ThemedText style={styles.balanceLabel}>Total Balance</ThemedText>
-        <ThemedText style={styles.balanceAmount}>₹{userData.todaySpend.toLocaleString()}</ThemedText>
+        <ThemedText style={styles.balanceAmount}>
+          ₹{userData.todaySpend.toLocaleString()}
+        </ThemedText>
       </View>
 
       <View style={styles.statsContainer}>
@@ -170,7 +193,9 @@ export default function HomePage() {
           <ThemedText style={styles.statsAmount}>₹24,589</ThemedText>
           <View style={styles.statsChange}>
             <MaterialCommunityIcons name="arrow-up" size={16} color="red" />
-            <ThemedText style={[styles.changeText, { color: 'red' }]}>13.39% in this month</ThemedText>
+            <ThemedText style={[styles.changeText, { color: "red" }]}>
+              13.39% in this month
+            </ThemedText>
           </View>
         </View>
 
@@ -179,14 +204,20 @@ export default function HomePage() {
           <ThemedText style={styles.statsAmount}>₹40,432</ThemedText>
           <View style={styles.statsChange}>
             <MaterialCommunityIcons name="arrow-up" size={16} color="green" />
-            <ThemedText style={[styles.changeText, { color: 'green' }]}>5.22% in this month</ThemedText>
+            <ThemedText style={[styles.changeText, { color: "green" }]}>
+              5.22% in this month
+            </ThemedText>
           </View>
         </View>
       </View>
 
       <View style={[styles.insightCard, { backgroundColor: cardBgColor }]}>
         <View style={styles.insightHeader}>
-          <MaterialCommunityIcons name="star-four-points" size={20} color={primaryColor} />
+          <MaterialCommunityIcons
+            name="star-four-points"
+            size={20}
+            color={primaryColor}
+          />
           <ThemedText style={styles.insightTitle}>AI Insight</ThemedText>
         </View>
         <ThemedText style={styles.insightText}>
@@ -230,27 +261,34 @@ export default function HomePage() {
 }
 
 // New Transaction Item Component
-function TransactionItem({ icon, title, amount, time, type }) {
+function TransactionItem({ icon, title, amount, time, type }: any) {
   const colorScheme = useColorScheme();
   const iconBgColors = {
-    food: '#FF6B6B',
-    briefcase: '#4ECDC4',
-    'medical-bag': '#45B7D1',
+    food: "#FF6B6B",
+    briefcase: "#4ECDC4",
+    "medical-bag": "#45B7D1",
   };
 
   return (
     <View style={styles.transactionItem}>
-      <View style={[styles.transactionIcon, { backgroundColor: iconBgColors[icon] }]}>
+      <View
+        style={[
+          styles.transactionIcon,
+          { backgroundColor: iconBgColors[icon as keyof typeof iconBgColors] },
+        ]}
+      >
         <MaterialCommunityIcons name={icon} size={24} color="white" />
       </View>
       <View style={styles.transactionInfo}>
         <ThemedText style={styles.transactionTitle}>{title}</ThemedText>
         <ThemedText style={styles.transactionTime}>{time}</ThemedText>
       </View>
-      <ThemedText style={[
-        styles.transactionAmount,
-        { color: type === 'expense' ? '#FF6B6B' : '#4ECDC4' }
-      ]}>
+      <ThemedText
+        style={[
+          styles.transactionAmount,
+          { color: type === "expense" ? "#FF6B6B" : "#4ECDC4" },
+        ]}
+      >
         {amount}
       </ThemedText>
     </View>
@@ -265,55 +303,55 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   topBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 16,
-    paddingTop: Platform.OS === 'ios' ? 60 : 40,
+    paddingTop: Platform.OS === "ios" ? 60 : 40,
     paddingBottom: 10,
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   iconButton: {
     padding: 12,
     borderRadius: 12,
   },
   accountSelector: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 8,
     paddingHorizontal: 16,
     borderRadius: 20,
     elevation: 1,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
   },
   accountText: {
     marginRight: 8,
-    fontWeight: '600',
+    fontWeight: "600",
     fontSize: 15,
   },
   balanceSection: {
     paddingHorizontal: 20,
     paddingVertical: 30,
-    alignItems: 'center',
+    alignItems: "center",
   },
   balanceLabel: {
     fontSize: 16,
     opacity: 0.7,
     marginBottom: 12,
-    textAlign: 'center',
+    textAlign: "center",
   },
   balanceAmount: {
     fontSize: 42,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     includeFontPadding: false,
     lineHeight: 50,
   },
   statsContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 16,
     gap: 12,
     marginTop: 10,
@@ -323,7 +361,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 20,
     elevation: 1,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
@@ -334,12 +372,12 @@ const styles = StyleSheet.create({
   },
   statsAmount: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginVertical: 4,
   },
   statsChange: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   changeText: {
     fontSize: 12,
@@ -351,13 +389,13 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   insightHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 8,
   },
   insightTitle: {
     marginLeft: 8,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   insightText: {
     fontSize: 14,
@@ -368,32 +406,32 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 16,
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   showAllText: {
-    color: '#8B5CF6',
-    fontWeight: '500',
+    color: "#8B5CF6",
+    fontWeight: "500",
   },
   transactionItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(0,0,0,0.05)',
+    borderBottomColor: "rgba(0,0,0,0.05)",
   },
   transactionIcon: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   transactionInfo: {
     flex: 1,
@@ -401,7 +439,7 @@ const styles = StyleSheet.create({
   },
   transactionTitle: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   transactionTime: {
     fontSize: 12,
@@ -410,6 +448,6 @@ const styles = StyleSheet.create({
   },
   transactionAmount: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
