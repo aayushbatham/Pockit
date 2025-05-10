@@ -2,8 +2,11 @@ package com.server.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import com.server.model.Transaction;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
+@Repository
 public interface TransactionRepository extends MongoRepository<Transaction, String> {
-    List<Transaction> findByPhoneNumber(String phoneNumber);
+    Optional<Transaction> findByPhoneNumber(String phoneNumber);
 }

@@ -34,7 +34,7 @@ public class TransactionService {
         return transactionRepository.findAll();
     }
 
-    public List<Transaction> getTransactionsByPhoneNumber(String phoneNumber) {
+    public Optional<Transaction> getTransactionsByPhoneNumber(String phoneNumber) {
         return transactionRepository.findByPhoneNumber(phoneNumber);
     }
 
