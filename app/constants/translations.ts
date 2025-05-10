@@ -20,7 +20,19 @@ export const translations: Translation = {
         cancel: "Cancel",
         add: "Add",
         adding: "Adding...",
-        success: "Transaction Added Successfully"
+        success: "Transaction Added Successfully",
+        totalBalance: "Total Balance",
+        expense: "Expense",
+        income: "Income",
+        thisMonth: "in this month",
+        aiInsight: "AI Insight",
+        transactions: "Transactions",
+        showAll: "Show All",
+        today: "Today",
+        yesterday: "Yesterday",
+        dinner: "Dinner",
+        designProject: "Design Project",
+        medicine: "Medicine"
     },
     gu: {
         home: "ઘર",
@@ -37,7 +49,19 @@ export const translations: Translation = {
         cancel: "રદ કરો",
         add: "ઉમેરો",
         adding: "ઉમેરી રહ્યા છીએ...",
-        success: "વ્યવહાર સફળતાપૂર્વક ઉમેરાયો"
+        success: "વ્યવહાર સફળતાપૂર્વક ઉમેરાયો",
+        totalBalance: "કુલ બેલેન્સ",
+        expense: "ખર્ચ",
+        income: "આવક",
+        thisMonth: "આ મહિનામાં",
+        aiInsight: "AI અંતર્દૃષ્ટિ",
+        transactions: "વ્યવહારો",
+        showAll: "બધા જુઓ",
+        today: "આજે",
+        yesterday: "ગઈકાલે",
+        dinner: "ડિનર",
+        designProject: "ડિઝાઇન પ્રોજેક્ટ",
+        medicine: "દવા"
     },
     mr: {
         home: "मुख्यपृष्ठ",
@@ -54,7 +78,19 @@ export const translations: Translation = {
         cancel: "रद्द करा",
         add: "जोडा",
         adding: "जोडत आहे...",
-        success: "व्यवहार यशस्वीरित्या जोडला"
+        success: "व्यवहार यशस्वीरित्या जोडला",
+        totalBalance: "एकूण शिल्लक",
+        expense: "खर्च",
+        income: "उत्पन्न",
+        thisMonth: "या महिन्यात",
+        aiInsight: "AI अंतर्दृष्टी",
+        transactions: "व्यवहार",
+        showAll: "सर्व पहा",
+        today: "आज",
+        yesterday: "काल",
+        dinner: "जेवण",
+        designProject: "डिझाइन प्रोजेक्ट",
+        medicine: "औषध"
     },
     hi: {
         home: "होम",
@@ -71,7 +107,19 @@ export const translations: Translation = {
         cancel: "रद्द करें",
         add: "जोड़ें",
         adding: "जोड़ रहे हैं...",
-        success: "लेन-देन सफलतापूर्वक जोड़ा गया"
+        success: "लेन-देन सफलतापूर्वक जोड़ा गया",
+        totalBalance: "कुल बैलेंस",
+        expense: "खर्च",
+        income: "आय",
+        thisMonth: "इस महीने में",
+        aiInsight: "AI अंतर्दृष्टि",
+        transactions: "लेन-देन",
+        showAll: "सभी देखें",
+        today: "आज",
+        yesterday: "कल",
+        dinner: "रात का खाना",
+        designProject: "डिज़ाइन प्रोजेक्ट",
+        medicine: "दवाई"
     }
 };
 

@@ -12,6 +12,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useAddTransaction } from "@/modules/hooks/use-add-transaction";
 import { ThemedText } from "@/components/ThemedText";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface BottomBarProps {
   primaryColor: string;
@@ -50,6 +51,7 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
 
   const router = useRouter();
   const pathname = usePathname();
+  const { t } = useLanguage();
 
   const isActive = (path: string) => pathname?.startsWith(path);
 
@@ -65,6 +67,12 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             size={26}
             color={isActive("/(home)") ? "#FFFFFF" : "#666666"}
           />
+          <ThemedText style={[
+            styles.tabLabel,
+            { color: isActive("/(home)") ? "#FFFFFF" : "#666666" }
+          ]}>
+            {t('home')}
+          </ThemedText>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -76,15 +84,24 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             size={26}
             color={isActive("/(spend)") ? "#FFFFFF" : "#666666"}
           />
+          <ThemedText style={[
+            styles.tabLabel,
+            { color: isActive("/(spend)") ? "#FFFFFF" : "#666666" }
+          ]}>
+            {t('expense')}
+          </ThemedText>
         </TouchableOpacity>
 
         <View style={styles.addButtonContainer}>
           <TouchableOpacity
-            style={styles.addButton}
+            style={[styles.addButton, { backgroundColor: primaryColor }]}
             onPress={() => setIsModalVisible(true)}
           >
             <MaterialCommunityIcons name="plus" size={32} color="#FFFFFF" />
           </TouchableOpacity>
+          <ThemedText style={styles.tabLabel}>
+            {t('add')}
+          </ThemedText>
         </View>
 
         <TouchableOpacity
@@ -96,6 +113,12 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             size={26}
             color={isActive("/wallet") ? "#FFFFFF" : "#666666"}
           />
+          <ThemedText style={[
+            styles.tabLabel,
+            { color: isActive("/wallet") ? "#FFFFFF" : "#666666" }
+          ]}>
+            {t('insights')}
+          </ThemedText>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -107,93 +130,15 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             size={26}
             color={isActive("/profile") ? "#FFFFFF" : "#666666"}
           />
+          <ThemedText style={[
+            styles.tabLabel,
+            { color: isActive("/profile") ? "#FFFFFF" : "#666666" }
+          ]}>
+            {t('profile')}
+          </ThemedText>
         </TouchableOpacity>
       </View>
 
-      <Modal
-        visible={isModalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setIsModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <ThemedText style={styles.modalTitle}>Add Transaction</ThemedText>
-
-            <TextInput
-              style={styles.input}
-              placeholder="Phone Number"
-              value={formData.phoneNumber}
-              onChangeText={(text) =>
-                setFormData((prev) => ({ ...prev, phoneNumber: text }))
-              }
-              placeholderTextColor="#666"
-            />
-
-            <TextInput
-              style={styles.input}
-              placeholder="Amount"
-              value={formData.amount}
-              onChangeText={(text) =>
-                setFormData((prev) => ({ ...prev, amount: text }))
-              }
-              keyboardType="numeric"
-              placeholderTextColor="#666"
-            />
-
-            <TextInput
-              style={styles.input}
-              placeholder="Category"
-              value={formData.spentCategory}
-              onChangeText={(text) =>
-                setFormData((prev) => ({ ...prev, spentCategory: text }))
-              }
-              placeholderTextColor="#666"
-            />
-
-            <TextInput
-              style={styles.input}
-              placeholder="Payment Method"
-              value={formData.methodeOfPayment}
-              onChangeText={(text) =>
-                setFormData((prev) => ({ ...prev, methodeOfPayment: text }))
-              }
-              placeholderTextColor="#666"
-            />
-
-            <TextInput
-              style={styles.input}
-              placeholder="Receiver"
-              value={formData.receiver}
-              onChangeText={(text) =>
-                setFormData((prev) => ({ ...prev, receiver: text }))
-              }
-              placeholderTextColor="#666"
-            />
-
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={[styles.button, styles.cancelButton]}
-                onPress={() => setIsModalVisible(false)}
-              >
-                <ThemedText style={styles.buttonText}>Cancel</ThemedText>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={[styles.button, styles.submitButton]}
-                onPress={handleSubmit}
-                disabled={isLoading}
-              >
-                <ThemedText style={styles.buttonText}>
-                  {isLoading ? "Adding..." : "Add"}
-                </ThemedText>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-
-      {/* Add Transaction Modal */}
       <Modal
         visible={isModalVisible}
         animationType="slide"
@@ -402,5 +347,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     fontWeight: "600",
+  },
+  tabLabel: {
+    fontSize: 12,
+    marginTop: 4,
+    color: "#666666",
   },
 });
