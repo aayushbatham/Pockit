@@ -1,33 +1,67 @@
 package com.server.util;
 
+import java.security.Key;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.stereotype.Component;
-
-import java.util.Date;
+import jakarta.annotation.PostConstruct;
 
 @Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "1qazxsw23edcvfr45tgbnhy67ujmki89olp0"; // at least 256 bits
-    private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10 hours
+    @Value("${jwt.secret}")
+    private String secret;
 
-    public String generateToken(String uid) {
+    @Value("${jwt.expiration}")
+    private Long expiration;
+
+    private Key key;
+
+    @PostConstruct
+    public void init() {
+        // Use a default secret if not provided in properties
+        if (secret == null || secret.trim().isEmpty()) {
+            secret = "defaultSecretKey123defaultSecretKey123defaultSecretKey123";
+        }
+        // Ensure the secret is at least 256 bits (32 bytes) when encoded
+        while (secret.getBytes().length < 32) {
+            secret = secret + secret;
+        }
+        key = Keys.hmacShaKeyFor(secret.getBytes());
+    }
+
+    public String generateToken(String userId) {
         return Jwts.builder()
-                .setSubject(uid)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()), SignatureAlgorithm.HS256)
+                .setSubject(userId)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000))
+                .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 
-    public String extractUid(String token) {
+    public String extractUserId(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(Keys.hmacShaKeyFor(SECRET_KEY.getBytes()))
+                .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
