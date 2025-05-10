@@ -3,6 +3,7 @@ import { View, ScrollView, Pressable, Dimensions, Platform, StyleSheet } from 'r
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Animated, { 
   useAnimatedStyle, 
   withSpring, 
@@ -128,6 +129,7 @@ const PieSegment: React.FC<PieSegmentProps> = ({ percentage, color, rotation, is
 
 export default function SpendPage() {
   const colorScheme = useColorScheme();
+  const { t } = useLanguage();
   const [timeframe, setTimeframe] = useState<'weekly' | 'monthly' | 'yearly'>('weekly');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const screenWidth = Dimensions.get('window').width;
@@ -148,27 +150,27 @@ export default function SpendPage() {
 
   const categoryData: CategoryData[] = [
     {
-      name: "Food",
+      name: t('food'),
       amount: 7589,
       color: "#FF3B30"  // Bright Red
     },
     {
-      name: "Shopping",
+      name: t('shopping'),
       amount: 5000,
       color: "#00C7BE"  // Bright Teal
     },
     {
-      name: "Transport",
+      name: t('transport'),
       amount: 3000,
       color: "#007AFF"  // Bright Blue
     },
     {
-      name: "Entertainment",
+      name: t('entertainment'),
       amount: 2000,
       color: "#34C759"  // Bright Green
     },
     {
-      name: "Others",
+      name: t('others'),
       amount: 1000,
       color: "#E4A0FF"  // Light Purple (replacing yellow)
     }
@@ -295,8 +297,8 @@ export default function SpendPage() {
             <View style={styles.container}>
               <View style={styles.header}>
                 <View>
-                  <ThemedText style={styles.title}>Analytics</ThemedText>
-                  <ThemedText style={styles.subtitle}>Track your spending</ThemedText>
+                  <ThemedText style={styles.title}>{t('analytics')}</ThemedText>
+                  <ThemedText style={styles.subtitle}>{t('trackSpending')}</ThemedText>
                 </View>
                 <Pressable 
                   style={[
@@ -304,7 +306,7 @@ export default function SpendPage() {
                     { backgroundColor: colorScheme === 'dark' ? '#1E1E1E' : '#F3F4F6' }
                   ]}
                 >
-                  <ThemedText style={styles.timeframeText}>{timeframe}</ThemedText>
+                  <ThemedText style={styles.timeframeText}>{t(timeframe)}</ThemedText>
                   <Ionicons 
                     name="chevron-down" 
                     size={20} 
@@ -330,7 +332,7 @@ export default function SpendPage() {
                         {calculatePercentage(selectedCategory)}%
                       </ThemedText>
                       <ThemedText style={styles.categoryText}>
-                        {selectedCategory}
+                        {t(selectedCategory.toLowerCase())}
                       </ThemedText>
                       <ThemedText style={styles.amountText}>
                         ${categoryData.find(c => c.name === selectedCategory)?.amount.toLocaleString()}
@@ -338,7 +340,7 @@ export default function SpendPage() {
                     </View>
                   ) : (
                     <View style={styles.centerContent}>
-                      <ThemedText style={styles.totalText}>Total Spend</ThemedText>
+                      <ThemedText style={styles.totalText}>{t('totalSpend')}</ThemedText>
                       <ThemedText style={[styles.percentageText, { fontSize: 28 }]}>
                         ${totalAmount.toLocaleString()}
                       </ThemedText>
@@ -403,10 +405,10 @@ export default function SpendPage() {
               <View style={styles.transactionsContainer}>
                 <View style={styles.transactionsHeader}>
                   <ThemedText style={styles.transactionsTitle}>
-                    {selectedCategory} Transactions
+                    {t(selectedCategory.toLowerCase())} {t('transactions')}
                   </ThemedText>
                   <ThemedText style={styles.transactionsCount}>
-                    {mockTransactions[selectedCategory]?.length || 0} items
+                    {mockTransactions[selectedCategory]?.length || 0} {t('items')}
                   </ThemedText>
                 </View>
                 
@@ -434,7 +436,7 @@ export default function SpendPage() {
                         />
                       </View>
                       <View>
-                        <ThemedText style={styles.transactionName}>{transaction.name}</ThemedText>
+                        <ThemedText style={styles.transactionName}>{t(transaction.name.toLowerCase())}</ThemedText>
                         <View style={styles.transactionMeta}>
                           <ThemedText style={styles.transactionTime}>
                             {new Date(transaction.date).toLocaleTimeString([], { 
@@ -447,7 +449,7 @@ export default function SpendPage() {
                             styles.transactionTag,
                             { backgroundColor: colorScheme === 'dark' ? '#333' : '#E5E7EB' }
                           ]}>
-                            <ThemedText style={styles.transactionTagText}>Cash</ThemedText>
+                            <ThemedText style={styles.transactionTagText}>{t('cash')}</ThemedText>
                           </View>
                         </View>
                       </View>
@@ -459,7 +461,7 @@ export default function SpendPage() {
                       ]}>
                         {transaction.amount < 0 ? '-' : '+'} ${Math.abs(transaction.amount).toFixed(2)}
                       </ThemedText>
-                      <ThemedText style={styles.transactionBalance}>Balance</ThemedText>
+                      <ThemedText style={styles.transactionBalance}>{t('balance')}</ThemedText>
                     </View>
                   </Pressable>
                 ))}

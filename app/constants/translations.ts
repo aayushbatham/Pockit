@@ -49,7 +49,21 @@ export const translations: Translation = {
         chatbotWelcome: "Hi! I'm your financial assistant. How can I help you today?",
         chatbotTitle: "Chatbot",
         chatbotPlaceholder: "Ask about your finances...",
-        chatbotSend: "Send"
+        chatbotSend: "Send",
+        analytics: "Analytics",
+        trackSpending: "Track your spending",
+        weekly: "Weekly",
+        monthly: "Monthly",
+        yearly: "Yearly",
+        totalSpend: "Total Spend",
+        food: "Food",
+        shopping: "Shopping",
+        transport: "Transport",
+        entertainment: "Entertainment",
+        others: "Others",
+        items: "items",
+        cash: "Cash",
+        balance: "Balance"
     },
     gu: {
         home: "ઘર",
@@ -95,7 +109,21 @@ export const translations: Translation = {
         chatbotWelcome: "નમસ્તે! હું તમારો નાણાકીય સહાયક છું. હું આજે તમારી કેવી રીતે મદદ કરી શકું?",
         chatbotTitle: "ચેટબોટ",
         chatbotPlaceholder: "તમારા નાણાં વિશે પૂછો...",
-        chatbotSend: "મોકલો"
+        chatbotSend: "મોકલો",
+        analytics: "એનાલિટિક્સ",
+        trackSpending: "તમારા ખર્ચને ટ્રૅક કરો",
+        weekly: "સાપ્તાહિક",
+        monthly: "માસિક",
+        yearly: "વાર્ષિક",
+        totalSpend: "કુલ ખર્ચ",
+        food: "ખોરાક",
+        shopping: "શોપિંગ",
+        transport: "પરિવહન",
+        entertainment: "મનોરંજન",
+        others: "અન્ય",
+        items: "આઇટમ્સ",
+        cash: "રોકડ",
+        balance: "બેલેન્સ"
     },
     mr: {
         home: "मुख्यपृष्ठ",
@@ -141,7 +169,21 @@ export const translations: Translation = {
         chatbotWelcome: "नमस्कार! मी तुमचा आर्थिक सहाय्यक आहे. मी आज तुमची कशी मदत करू शकतो?",
         chatbotTitle: "चॅटबॉट",
         chatbotPlaceholder: "तुमच्या वित्ताबद्दल विचारा...",
-        chatbotSend: "पाठवा"
+        chatbotSend: "पाठवा",
+        analytics: "विश्लेषण",
+        trackSpending: "तुमचा खर्च ट्रॅक करा",
+        weekly: "साप्ताहिक",
+        monthly: "मासिक",
+        yearly: "वार्षिक",
+        totalSpend: "एकूण खर्च",
+        food: "अन्न",
+        shopping: "खरेदी",
+        transport: "वाहतूक",
+        entertainment: "मनोरंजन",
+        others: "इतर",
+        items: "आयटम",
+        cash: "रोख",
+        balance: "शिल्लक"
     },
     hi: {
         home: "होम",
@@ -187,7 +229,21 @@ export const translations: Translation = {
         chatbotWelcome: "नमस्ते! मैं आपका वित्तीय सहायक हूं। मैं आज आपकी कैसे मदद कर सकता हूं?",
         chatbotTitle: "चैटबॉट",
         chatbotPlaceholder: "अपने वित्त के बारे में पूछें...",
-        chatbotSend: "भेजें"
+        chatbotSend: "भेजें",
+        analytics: "विश्लेषण",
+        trackSpending: "अपना खर्च ट्रैक करें",
+        weekly: "साप्ताहिक",
+        monthly: "मासिक",
+        yearly: "वार्षिक",
+        totalSpend: "कुल खर्च",
+        food: "भोजन",
+        shopping: "खरीदारी",
+        transport: "परिवहन",
+        entertainment: "मनोरंजन",
+        others: "अन्य",
+        items: "आइटम",
+        cash: "नकद",
+        balance: "शेष"
     }
 };
 
