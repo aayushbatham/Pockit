@@ -12,10 +12,11 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:3000");
+        config.setAllowCredentials(false); // Change to false for mobile apps
+        config.addAllowedOriginPattern("*"); // Use pattern instead of specific origin
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
+        config.addExposedHeader("Authorization"); // Add this to expose JWT header
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

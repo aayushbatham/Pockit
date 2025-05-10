@@ -18,10 +18,11 @@ interface SignupResponse {
 }
 
 const signupUser = async (userData: SignupData): Promise<SignupResponse> => {
-  const response = await fetch('http://localhost:8080/api/auth/register', {
+  const response = await fetch('http://192.168.137.1:8080/api/auth/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
     body: JSON.stringify(userData),
   });
