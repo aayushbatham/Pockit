@@ -47,7 +47,7 @@ export const translations: Translation = {
         wallet: "Wallet",
         spendAnalysis: "Spend Analysis",
         chatbotWelcome: "Hi! I'm your financial assistant. How can I help you today?",
-        chatbotTitle: "Chatbot",
+        chatbotTitle: "Pockit AI",
         chatbotPlaceholder: "Ask about your finances...",
         chatbotSend: "Send"
     },
@@ -93,7 +93,7 @@ export const translations: Translation = {
         wallet: "વૉલેટ",
         spendAnalysis: "ખર્ચ વિશ્લેષણ",
         chatbotWelcome: "નમસ્તે! હું તમારો નાણાકીય સહાયક છું. હું આજે તમારી કેવી રીતે મદદ કરી શકું?",
-        chatbotTitle: "ચેટબોટ",
+        chatbotTitle: "પોકિટ AI",
         chatbotPlaceholder: "તમારા નાણાં વિશે પૂછો...",
         chatbotSend: "મોકલો"
     },
@@ -139,7 +139,7 @@ export const translations: Translation = {
         wallet: "पाकीट",
         spendAnalysis: "खर्च विश्लेषण",
         chatbotWelcome: "नमस्कार! मी तुमचा आर्थिक सहाय्यक आहे. मी आज तुमची कशी मदत करू शकतो?",
-        chatbotTitle: "चॅटबॉट",
+        chatbotTitle: "पोकिट AI",
         chatbotPlaceholder: "तुमच्या वित्ताबद्दल विचारा...",
         chatbotSend: "पाठवा"
     },
@@ -185,7 +185,7 @@ export const translations: Translation = {
         wallet: "वॉलेट",
         spendAnalysis: "खर्च विश्लेषण",
         chatbotWelcome: "नमस्ते! मैं आपका वित्तीय सहायक हूं। मैं आज आपकी कैसे मदद कर सकता हूं?",
-        chatbotTitle: "चैटबॉट",
+        chatbotTitle: "पोकिट AI",
         chatbotPlaceholder: "अपने वित्त के बारे में पूछें...",
         chatbotSend: "भेजें"
     }
