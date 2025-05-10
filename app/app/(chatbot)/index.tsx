@@ -150,204 +150,103 @@ Extract spending information from this message and respond ONLY with a JSON obje
       style={{ flex: 1 }}
       keyboardVerticalOffset={Platform.OS === "ios" ? 90 : 20}
     >
-      <ThemedView style={{ flex: 1 }}>
-        <View
-          style={{
-            padding: 16,
-            borderBottomWidth: 1,
-            borderBottomColor: colorScheme === "dark" ? "#333333" : "#E5E5E5",
-            backgroundColor: colorScheme === "dark" ? "#000000" : "#FFFFFF",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <ThemedText
-            style={{
-              fontSize: 20,
-              fontWeight: "600",
-              color: primaryColor,
-            }}
-          >
-            {t('chatbotTitle')}
-          </ThemedText>
+      <ThemedView style={styles.container}>
+        <View style={styles.header}>
+          <MaterialCommunityIcons name="robot" size={24} color={primaryColor} />
+          <ThemedText style={styles.headerTitle}>{t('chatbotTitle')}</ThemedText>
         </View>
+
         <ScrollView
-          style={{ flex: 1, padding: 16 }}
-          contentContainerStyle={{ paddingBottom: 20 }}
+          style={styles.messageContainer}
+          contentContainerStyle={styles.messageContent}
           keyboardShouldPersistTaps="handled"
         >
           {messages.map((message, index) => (
             <View
               key={index}
-              style={{
-                alignSelf: message.isUser ? "flex-end" : "flex-start",
-                backgroundColor: message.isUser
-                  ? primaryColor
-                  : colorScheme === "dark"
-                  ? "#1E1E1E"
-                  : "#F3F4F6",
-                padding: 12,
-                borderRadius: 16,
-                maxWidth: "80%",
-                marginVertical: 4,
-              }}
+              style={[
+                styles.messageCard,
+                message.isUser ? styles.userCard : styles.assistantCard,
+              ]}
             >
+              {!message.isUser && (
+                <View style={styles.assistantHeader}>
+                  <MaterialCommunityIcons
+                    name="robot"
+                    size={20}
+                    color={primaryColor}
+                  />
+                  <ThemedText style={styles.assistantTitle}>Pockit</ThemedText>
+                </View>
+              )}
               <ThemedText
-                style={{
-                  color:
-                    message.isUser || colorScheme === "dark"
-                      ? "#FFFFFF"
-                      : "#000000",
-                }}
+                style={[
+                  styles.messageText,
+                  message.isUser ? styles.userText : styles.assistantText,
+                ]}
               >
                 {message.text}
               </ThemedText>
+              {!message.isUser && message.data && (
+                <View style={styles.transactionDetails}>
+                  {message.data.amount && (
+                    <View style={styles.detailItem}>
+                      <MaterialCommunityIcons name="currency-inr" size={16} color={primaryColor} />
+                      <ThemedText style={styles.detailText}>
+                        Amount: ₹{message.data.amount}
+                      </ThemedText>
+                    </View>
+                  )}
+                  {message.data.spentCategory && message.data.spentCategory !== "null" && (
+                    <View style={styles.detailItem}>
+                      <MaterialCommunityIcons name="tag" size={16} color={primaryColor} />
+                      <ThemedText style={styles.detailText}>
+                        Category: {message.data.spentCategory}
+                      </ThemedText>
+                    </View>
+                  )}
+                  {message.data.receiver && message.data.receiver !== "null" && (
+                    <View style={styles.detailItem}>
+                      <MaterialCommunityIcons name="store" size={16} color={primaryColor} />
+                      <ThemedText style={styles.detailText}>
+                        Paid to: {message.data.receiver}
+                      </ThemedText>
+                    </View>
+                  )}
+                </View>
+              )}
             </View>
           ))}
           {isLoading && (
-            <View style={{ padding: 20, alignItems: "center" }}>
+            <View style={styles.loadingContainer}>
               <ActivityIndicator color={primaryColor} />
             </View>
           )}
         </ScrollView>
-    <ThemedView style={styles.container}>
-      <View style={styles.header}>
-        <MaterialCommunityIcons name="robot" size={24} color={primaryColor} />
-        <ThemedText style={styles.headerTitle}>Talk to pockit</ThemedText>
-      </View>
 
-      <ScrollView
-        style={styles.messageContainer}
-        contentContainerStyle={styles.messageContent}
-        keyboardShouldPersistTaps="handled"
-      >
-        {messages.map((message, index) => (
-          <View
-            key={index}
-            style={[
-              styles.messageCard,
-              message.isUser ? styles.userCard : styles.assistantCard,
-            ]}
-          >
-            {!message.isUser && (
-              <View style={styles.assistantHeader}>
-                <MaterialCommunityIcons
-                  name="robot"
-                  size={20}
-                  color={primaryColor}
-                />
-                <ThemedText style={styles.assistantTitle}>Pockit</ThemedText>
-              </View>
-            )}
-            <ThemedText
-              style={[
-                styles.messageText,
-                message.isUser ? styles.userText : styles.assistantText,
-              ]}
-            >
-              {message.text}
-            </ThemedText>
-            {!message.isUser && message.data && (
-              <View style={styles.transactionDetails}>
-                {message.data.amount && (
-                  <View style={styles.detailItem}>
-                    <MaterialCommunityIcons name="currency-inr" size={16} color={primaryColor} />
-                    <ThemedText style={styles.detailText}>
-                      Amount: ₹{message.data.amount}
-                    </ThemedText>
-                  </View>
-                )}
-                {message.data.spentCategory && message.data.spentCategory !== "null" && (
-                  <View style={styles.detailItem}>
-                    <MaterialCommunityIcons name="tag" size={16} color={primaryColor} />
-                    <ThemedText style={styles.detailText}>
-                      Category: {message.data.spentCategory}
-                    </ThemedText>
-                  </View>
-                )}
-                {message.data.receiver && message.data.receiver !== "null" && (
-                  <View style={styles.detailItem}>
-                    <MaterialCommunityIcons name="store" size={16} color={primaryColor} />
-                    <ThemedText style={styles.detailText}>
-                      Paid to: {message.data.receiver}
-                    </ThemedText>
-                  </View>
-                )}
-              </View>
-            )}
-          </View>
-        ))}
-        {isLoading && (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator color={primaryColor} />
-          </View>
-        )}
-      </ScrollView>
-
-        <View
-          style={{
-            flexDirection: "row",
-            padding: 16,
-            paddingBottom: Platform.OS === "ios" ? 30 : 16,
-            borderTopWidth: 1,
-            borderTopColor: colorScheme === "dark" ? "#333333" : "#E5E5E5",
-            backgroundColor: colorScheme === "dark" ? "#000000" : "#FFFFFF",
-          }}
-        >
+        <View style={styles.inputContainer}>
           <TextInput
             value={input}
             onChangeText={setInput}
             placeholder={t('chatbotPlaceholder')}
-            placeholderTextColor={
-              colorScheme === "dark" ? "#666666" : "#999999"
-            }
-            style={{
-              flex: 1,
-              marginRight: 8,
-              padding: 12,
-              borderRadius: 20,
-              backgroundColor: colorScheme === "dark" ? "#1E1E1E" : "#F3F4F6",
-              color: colorScheme === "dark" ? "#FFFFFF" : "#000000",
-            }}
+            placeholderTextColor={colorScheme === "dark" ? "#666666" : "#999999"}
+            style={[
+              styles.input,
+              { backgroundColor: colorScheme === "dark" ? "#1E1E1E" : "#F3F4F6" },
+              { color: colorScheme === "dark" ? "#FFFFFF" : "#000000" },
+            ]}
+            multiline
+            maxLength={500}
           />
           <Pressable
             onPress={handleSend}
-            style={{
-              backgroundColor: primaryColor,
-              padding: 12,
-              borderRadius: 20,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+            style={[styles.sendButton, { opacity: input.trim() ? 1 : 0.5 }]}
+            disabled={!input.trim() || isLoading}
           >
-            <ThemedText style={{ color: "#FFFFFF" }}>{t('chatbotSend')}</ThemedText>
+            <MaterialCommunityIcons name="send" size={20} color="#FFFFFF" />
           </Pressable>
         </View>
       </ThemedView>
-      <View style={styles.inputContainer}>
-        <TextInput
-          value={input}
-          onChangeText={setInput}
-          placeholder="Tell me about your spending..."
-          placeholderTextColor={colorScheme === "dark" ? "#666666" : "#999999"}
-          style={[
-            styles.input,
-            { backgroundColor: colorScheme === "dark" ? "#1E1E1E" : "#F3F4F6" },
-            { color: colorScheme === "dark" ? "#FFFFFF" : "#000000" },
-          ]}
-          multiline
-          maxLength={500}
-        />
-        <Pressable
-          onPress={handleSend}
-          style={[styles.sendButton, { opacity: input.trim() ? 1 : 0.5 }]}
-          disabled={!input.trim() || isLoading}
-        >
-          <MaterialCommunityIcons name="send" size={20} color="#FFFFFF" />
-        </Pressable>
-      </View>
-    </ThemedView>
     </KeyboardAvoidingView>
   );
 }
