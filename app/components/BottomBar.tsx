@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Platform, Modal, TextInput } from 'react-native';
-import { useRouter, usePathname } from 'expo-router';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { useAddTransaction } from '@/modules/hooks/use-add-transaction';
-import { ThemedText } from '@/components/ThemedText';
+import React, { useState } from "react";
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+  Modal,
+  TextInput,
+} from "react-native";
+import { useRouter, usePathname } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { useAddTransaction } from "@/modules/hooks/use-add-transaction";
+import { ThemedText } from "@/components/ThemedText";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface BottomBarProps {
   primaryColor: string;
@@ -13,17 +21,21 @@ interface BottomBarProps {
 export function BottomBar({ primaryColor }: BottomBarProps) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [formData, setFormData] = useState({
-    phoneNumber: '',
-    amount: '',
-    spentCategory: '',
-    methodeOfPayment: '',
-    receiver: '',
+    phoneNumber: "",
+    amount: "",
+    spentCategory: "",
+    methodeOfPayment: "",
+    receiver: "",
   });
-  
-  const { mutate: addTransaction, isLoading } = useAddTransaction();
-  
+
+  const { mutate: addTransaction, isLoading }: any = useAddTransaction();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  
+  const router = useRouter();
+  const pathname = usePathname();
+  const { t, isRTL } = useLanguage();
+
+  const isActive = (path: string) => pathname?.startsWith(path);
+
   const handleSubmit = () => {
     addTransaction({
       ...formData,
@@ -31,155 +43,73 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
     });
     setIsModalVisible(false);
     setFormData({
-      phoneNumber: '',
-      amount: '',
-      spentCategory: '',
-      methodeOfPayment: '',
-      receiver: '',
+      phoneNumber: "",
+      amount: "",
+      spentCategory: "",
+      methodeOfPayment: "",
+      receiver: "",
     });
     setShowSuccessModal(true);
     setTimeout(() => setShowSuccessModal(false), 2000);
   };
-  
-  const router = useRouter();
-  const pathname = usePathname();
-  
-  const isActive = (path: string) => pathname?.startsWith(path);
-  
+
   return (
     <>
       <View style={styles.container}>
-        <TouchableOpacity 
-          style={styles.tabButton} 
-          onPress={() => router.push('/(home)')}
+        <TouchableOpacity
+          style={styles.tabButton}
+          onPress={() => router.push("/(home)")}
         >
-          <MaterialCommunityIcons 
-            name="home" 
-            size={26} 
-            color={isActive('/(home)') ? "#FFFFFF" : "#666666"} 
+          <MaterialCommunityIcons
+            name="home"
+            size={26}
+            color={isActive("/(home)") ? "#FFFFFF" : "#666666"}
           />
         </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={styles.tabButton} 
-          onPress={() => router.push('/stats')}
+
+        <TouchableOpacity
+          style={styles.tabButton}
+          onPress={() => router.push("/")}
         >
-          <MaterialCommunityIcons 
-            name="chart-pie" 
-            size={26} 
-            color={isActive('/stats') ? "#FFFFFF" : "#666666"} 
+          <MaterialCommunityIcons
+            name="chart-pie"
+            size={26}
+            color={isActive("/(spend)") ? "#FFFFFF" : "#666666"}
           />
         </TouchableOpacity>
-        
+
         <View style={styles.addButtonContainer}>
-          <TouchableOpacity 
-            style={styles.addButton}
+          <TouchableOpacity
+            style={[styles.addButton, { backgroundColor: primaryColor }]}
             onPress={() => setIsModalVisible(true)}
           >
-            <MaterialCommunityIcons 
-              name="plus" 
-              size={32} 
-              color="#FFFFFF" 
-            />
+            <MaterialCommunityIcons name="plus" size={32} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
-        
-        <TouchableOpacity 
-          style={styles.tabButton} 
-          onPress={() => router.push('/(chatbot)')}
+
+        <TouchableOpacity
+          style={styles.tabButton}
+          onPress={() => router.push("/(chatbot)")}
         >
-          <MaterialCommunityIcons 
-            name="wallet" 
-            size={26} 
-            color={isActive('/wallet') ? "#FFFFFF" : "#666666"} 
+          <MaterialCommunityIcons
+            name="wallet"
+            size={26}
+            color={isActive("/wallet") ? "#FFFFFF" : "#666666"}
           />
         </TouchableOpacity>
-        
-        <TouchableOpacity 
-          style={styles.tabButton} 
-          onPress={() => router.push('/(profile)')}
+
+        <TouchableOpacity
+          style={styles.tabButton}
+          onPress={() => router.push("/(profile)")}
         >
-          <MaterialCommunityIcons 
-            name="account" 
-            size={26} 
-            color={isActive('/profile') ? "#FFFFFF" : "#666666"} 
+          <MaterialCommunityIcons
+            name="account"
+            size={26}
+            color={isActive("/profile") ? "#FFFFFF" : "#666666"}
           />
         </TouchableOpacity>
       </View>
-      
-      <Modal
-        visible={isModalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setIsModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <ThemedText style={styles.modalTitle}>Add Transaction</ThemedText>
-            
-            <TextInput
-              style={styles.input}
-              placeholder="Phone Number"
-              value={formData.phoneNumber}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, phoneNumber: text }))}
-              placeholderTextColor="#666"
-            />
-            
-            <TextInput
-              style={styles.input}
-              placeholder="Amount"
-              value={formData.amount}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, amount: text }))}
-              keyboardType="numeric"
-              placeholderTextColor="#666"
-            />
-            
-            <TextInput
-              style={styles.input}
-              placeholder="Category"
-              value={formData.spentCategory}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, spentCategory: text }))}
-              placeholderTextColor="#666"
-            />
-            
-            <TextInput
-              style={styles.input}
-              placeholder="Payment Method"
-              value={formData.methodeOfPayment}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, methodeOfPayment: text }))}
-              placeholderTextColor="#666"
-            />
-            
-            <TextInput
-              style={styles.input}
-              placeholder="Receiver"
-              value={formData.receiver}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, receiver: text }))}
-              placeholderTextColor="#666"
-            />
 
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity 
-                style={[styles.button, styles.cancelButton]}
-                onPress={() => setIsModalVisible(false)}
-              >
-                <ThemedText style={styles.buttonText}>Cancel</ThemedText>
-              </TouchableOpacity>
-              
-              <TouchableOpacity 
-                style={[styles.button, styles.submitButton]}
-                onPress={handleSubmit}
-                disabled={isLoading}
-              >
-                <ThemedText style={styles.buttonText}>
-                  {isLoading ? 'Adding...' : 'Add'}
-                </ThemedText>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-      
       {/* Add Transaction Modal */}
       <Modal
         visible={isModalVisible}
@@ -189,86 +119,122 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <ThemedText style={styles.modalTitle}>Add Transaction</ThemedText>
-            
+            <ThemedText style={styles.modalTitle}>{t('addTransaction')}</ThemedText>
+
             <TextInput
-              style={styles.input}
-              placeholder="Phone Number"
+              style={[
+                styles.input,
+                {
+                  textAlign: isRTL ? 'right' : 'left',
+                  writingDirection: isRTL ? 'rtl' : 'ltr'
+                }
+              ]}
+              placeholder={t('enterPhoneNumber')}
               value={formData.phoneNumber}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, phoneNumber: text }))}
+              onChangeText={(text) =>
+                setFormData((prev) => ({ ...prev, phoneNumber: text }))
+              }
               placeholderTextColor="#666"
             />
-            
+
             <TextInput
-              style={styles.input}
-              placeholder="Amount"
+              style={[
+                styles.input,
+                {
+                  textAlign: isRTL ? 'right' : 'left',
+                  writingDirection: isRTL ? 'rtl' : 'ltr'
+                }
+              ]}
+              placeholder={t('enterAmount')}
               value={formData.amount}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, amount: text }))}
+              onChangeText={(text) =>
+                setFormData((prev) => ({ ...prev, amount: text }))
+              }
               keyboardType="numeric"
               placeholderTextColor="#666"
             />
-            
+
             <TextInput
-              style={styles.input}
-              placeholder="Category"
+              style={[
+                styles.input,
+                {
+                  textAlign: isRTL ? 'right' : 'left',
+                  writingDirection: isRTL ? 'rtl' : 'ltr'
+                }
+              ]}
+              placeholder={t('enterCategory')}
               value={formData.spentCategory}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, spentCategory: text }))}
+              onChangeText={(text) =>
+                setFormData((prev) => ({ ...prev, spentCategory: text }))
+              }
               placeholderTextColor="#666"
             />
-            
+
             <TextInput
-              style={styles.input}
-              placeholder="Payment Method"
+              style={[
+                styles.input,
+                {
+                  textAlign: isRTL ? 'right' : 'left',
+                  writingDirection: isRTL ? 'rtl' : 'ltr'
+                }
+              ]}
+              placeholder={t('enterPaymentMethod')}
               value={formData.methodeOfPayment}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, methodeOfPayment: text }))}
+              onChangeText={(text) =>
+                setFormData((prev) => ({ ...prev, methodeOfPayment: text }))
+              }
               placeholderTextColor="#666"
             />
-            
+
             <TextInput
-              style={styles.input}
-              placeholder="Receiver"
+              style={[
+                styles.input,
+                {
+                  textAlign: isRTL ? 'right' : 'left',
+                  writingDirection: isRTL ? 'rtl' : 'ltr'
+                }
+              ]}
+              placeholder={t('enterReceiver')}
               value={formData.receiver}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, receiver: text }))}
+              onChangeText={(text) =>
+                setFormData((prev) => ({ ...prev, receiver: text }))
+              }
               placeholderTextColor="#666"
             />
 
             <View style={styles.buttonContainer}>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={[styles.button, styles.cancelButton]}
                 onPress={() => setIsModalVisible(false)}
               >
-                <ThemedText style={styles.buttonText}>Cancel</ThemedText>
+                <ThemedText style={styles.buttonText}>{t('cancel')}</ThemedText>
               </TouchableOpacity>
-              
-              <TouchableOpacity 
-                style={[styles.button, styles.submitButton]}
+
+              <TouchableOpacity
+                style={[styles.button, styles.submitButton, { backgroundColor: primaryColor }]}
                 onPress={handleSubmit}
                 disabled={isLoading}
               >
                 <ThemedText style={styles.buttonText}>
-                  {isLoading ? 'Adding...' : 'Add'}
+                  {isLoading ? t('adding') : t('add')}
                 </ThemedText>
               </TouchableOpacity>
             </View>
           </View>
         </View>
       </Modal>
-      
+
       {/* Success Modal */}
-      <Modal
-        visible={showSuccessModal}
-        transparent={true}
-        animationType="fade"
-      >
+      <Modal visible={showSuccessModal} transparent={true} animationType="fade">
         <View style={styles.successModalContainer}>
           <View style={styles.successModalContent}>
-            <MaterialCommunityIcons 
-              name="check-circle" 
-              size={50} 
+            <MaterialCommunityIcons
+              name="check-circle"
+              size={50}
               color="#4CAF50"
             />
             <ThemedText style={styles.successModalText}>
-              Transaction Added Successfully
+              {t('transactionSuccess')}
             </ThemedText>
           </View>
         </View>
@@ -279,36 +245,36 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    height: Platform.OS === 'ios' ? 85 : 85,
-    paddingBottom: Platform.OS === 'ios' ? 20 : 0,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    backgroundColor: '#000000',
+    flexDirection: "row",
+    height: Platform.OS === "ios" ? 85 : 85,
+    paddingBottom: Platform.OS === "ios" ? 20 : 0,
+    alignItems: "center",
+    justifyContent: "space-around",
+    backgroundColor: "#000000",
     borderTopWidth: 0,
     paddingHorizontal: 16,
   },
   tabButton: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
   },
   addButtonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     width: 75,
-    height: Platform.OS === 'ios' ? 85 : 65,
+    height: Platform.OS === "ios" ? 85 : 65,
     marginTop: -40,
   },
   addButton: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#2C2C2E',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
+    backgroundColor: "#2C2C2E",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 4,
@@ -319,52 +285,52 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: "flex-end",
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalContent: {
-    backgroundColor: '#1C1C1E',
+    backgroundColor: "#1C1C1E",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
-    paddingBottom: Platform.OS === 'ios' ? 40 : 20,
+    paddingBottom: Platform.OS === "ios" ? 40 : 20,
   },
   successModalContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
   successModalContent: {
-    backgroundColor: '#1C1C1E',
+    backgroundColor: "#1C1C1E",
     padding: 20,
     borderRadius: 15,
-    alignItems: 'center',
+    alignItems: "center",
     gap: 10,
   },
   successModalText: {
     fontSize: 16,
-    fontWeight: '600',
-    color: '#FFFFFF',
+    fontWeight: "600",
+    color: "#FFFFFF",
     marginTop: 10,
   },
   modalTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   input: {
-    backgroundColor: '#2C2C2E',
+    backgroundColor: "#2C2C2E",
     borderRadius: 10,
     padding: 15,
     marginBottom: 12,
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 16,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 20,
   },
   button: {
@@ -374,14 +340,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   cancelButton: {
-    backgroundColor: '#2C2C2E',
+    backgroundColor: "#2C2C2E",
   },
   submitButton: {
-    backgroundColor: '#8B5CF6',
+    backgroundColor: "#8B5CF6",
   },
   buttonText: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });
