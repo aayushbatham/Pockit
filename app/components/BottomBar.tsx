@@ -29,8 +29,12 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
   });
 
   const { mutate: addTransaction, isLoading }: any = useAddTransaction();
-
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const { t, isRTL } = useLanguage();
+
+  const isActive = (path: string) => pathname?.startsWith(path);
 
   const handleSubmit = () => {
     addTransaction({
@@ -49,12 +53,6 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
     setTimeout(() => setShowSuccessModal(false), 2000);
   };
 
-  const router = useRouter();
-  const pathname = usePathname();
-  const { t } = useLanguage();
-
-  const isActive = (path: string) => pathname?.startsWith(path);
-
   return (
     <>
       <View style={styles.container}>
@@ -67,29 +65,17 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             size={26}
             color={isActive("/(home)") ? "#FFFFFF" : "#666666"}
           />
-          <ThemedText style={[
-            styles.tabLabel,
-            { color: isActive("/(home)") ? "#FFFFFF" : "#666666" }
-          ]}>
-            {t('home')}
-          </ThemedText>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.tabButton}
-          onPress={() => router.push("/(spend)")}
+          onPress={() => router.push("/")}
         >
           <MaterialCommunityIcons
             name="chart-pie"
             size={26}
             color={isActive("/(spend)") ? "#FFFFFF" : "#666666"}
           />
-          <ThemedText style={[
-            styles.tabLabel,
-            { color: isActive("/(spend)") ? "#FFFFFF" : "#666666" }
-          ]}>
-            {t('expense')}
-          </ThemedText>
         </TouchableOpacity>
 
         <View style={styles.addButtonContainer}>
@@ -99,9 +85,6 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
           >
             <MaterialCommunityIcons name="plus" size={32} color="#FFFFFF" />
           </TouchableOpacity>
-          <ThemedText style={styles.tabLabel}>
-            {t('add')}
-          </ThemedText>
         </View>
 
         <TouchableOpacity
@@ -113,12 +96,6 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             size={26}
             color={isActive("/wallet") ? "#FFFFFF" : "#666666"}
           />
-          <ThemedText style={[
-            styles.tabLabel,
-            { color: isActive("/wallet") ? "#FFFFFF" : "#666666" }
-          ]}>
-            {t('insights')}
-          </ThemedText>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -130,15 +107,10 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             size={26}
             color={isActive("/profile") ? "#FFFFFF" : "#666666"}
           />
-          <ThemedText style={[
-            styles.tabLabel,
-            { color: isActive("/profile") ? "#FFFFFF" : "#666666" }
-          ]}>
-            {t('profile')}
-          </ThemedText>
         </TouchableOpacity>
       </View>
 
+      {/* Add Transaction Modal */}
       <Modal
         visible={isModalVisible}
         animationType="slide"
@@ -147,11 +119,17 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <ThemedText style={styles.modalTitle}>Add Transaction</ThemedText>
+            <ThemedText style={styles.modalTitle}>{t('addTransaction')}</ThemedText>
 
             <TextInput
-              style={styles.input}
-              placeholder="Phone Number"
+              style={[
+                styles.input,
+                {
+                  textAlign: isRTL ? 'right' : 'left',
+                  writingDirection: isRTL ? 'rtl' : 'ltr'
+                }
+              ]}
+              placeholder={t('enterPhoneNumber')}
               value={formData.phoneNumber}
               onChangeText={(text) =>
                 setFormData((prev) => ({ ...prev, phoneNumber: text }))
@@ -160,8 +138,14 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             />
 
             <TextInput
-              style={styles.input}
-              placeholder="Amount"
+              style={[
+                styles.input,
+                {
+                  textAlign: isRTL ? 'right' : 'left',
+                  writingDirection: isRTL ? 'rtl' : 'ltr'
+                }
+              ]}
+              placeholder={t('enterAmount')}
               value={formData.amount}
               onChangeText={(text) =>
                 setFormData((prev) => ({ ...prev, amount: text }))
@@ -171,8 +155,14 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             />
 
             <TextInput
-              style={styles.input}
-              placeholder="Category"
+              style={[
+                styles.input,
+                {
+                  textAlign: isRTL ? 'right' : 'left',
+                  writingDirection: isRTL ? 'rtl' : 'ltr'
+                }
+              ]}
+              placeholder={t('enterCategory')}
               value={formData.spentCategory}
               onChangeText={(text) =>
                 setFormData((prev) => ({ ...prev, spentCategory: text }))
@@ -181,8 +171,14 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             />
 
             <TextInput
-              style={styles.input}
-              placeholder="Payment Method"
+              style={[
+                styles.input,
+                {
+                  textAlign: isRTL ? 'right' : 'left',
+                  writingDirection: isRTL ? 'rtl' : 'ltr'
+                }
+              ]}
+              placeholder={t('enterPaymentMethod')}
               value={formData.methodeOfPayment}
               onChangeText={(text) =>
                 setFormData((prev) => ({ ...prev, methodeOfPayment: text }))
@@ -191,8 +187,14 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
             />
 
             <TextInput
-              style={styles.input}
-              placeholder="Receiver"
+              style={[
+                styles.input,
+                {
+                  textAlign: isRTL ? 'right' : 'left',
+                  writingDirection: isRTL ? 'rtl' : 'ltr'
+                }
+              ]}
+              placeholder={t('enterReceiver')}
               value={formData.receiver}
               onChangeText={(text) =>
                 setFormData((prev) => ({ ...prev, receiver: text }))
@@ -205,16 +207,16 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
                 style={[styles.button, styles.cancelButton]}
                 onPress={() => setIsModalVisible(false)}
               >
-                <ThemedText style={styles.buttonText}>Cancel</ThemedText>
+                <ThemedText style={styles.buttonText}>{t('cancel')}</ThemedText>
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={[styles.button, styles.submitButton]}
+                style={[styles.button, styles.submitButton, { backgroundColor: primaryColor }]}
                 onPress={handleSubmit}
                 disabled={isLoading}
               >
                 <ThemedText style={styles.buttonText}>
-                  {isLoading ? "Adding..." : "Add"}
+                  {isLoading ? t('adding') : t('add')}
                 </ThemedText>
               </TouchableOpacity>
             </View>
@@ -232,7 +234,7 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
               color="#4CAF50"
             />
             <ThemedText style={styles.successModalText}>
-              Transaction Added Successfully
+              {t('transactionSuccess')}
             </ThemedText>
           </View>
         </View>
@@ -347,10 +349,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     fontWeight: "600",
-  },
-  tabLabel: {
-    fontSize: 12,
-    marginTop: 4,
-    color: "#666666",
   },
 });

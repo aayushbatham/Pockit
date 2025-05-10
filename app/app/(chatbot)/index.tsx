@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -13,6 +13,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { GEMKEY } from "@/constants/keys";
 import Anthropic from "@anthropic-ai/sdk";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Message {
   text: string;
@@ -21,9 +22,10 @@ interface Message {
 }
 
 export default function ChatbotPage() {
+  const { t, language } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
-      text: "Hi! I'm your financial assistant. How can I help you today?",
+      text: t('chatbotWelcome'),
       isUser: false,
     },
   ]);
@@ -31,6 +33,14 @@ export default function ChatbotPage() {
   const [isLoading, setIsLoading] = useState(false);
   const colorScheme = useColorScheme();
   const primaryColor = "#8B5CF6";
+
+  // Update welcome message when language changes
+  useEffect(() => {
+    setMessages(prev => [{
+      text: t('chatbotWelcome'),
+      isUser: false,
+    }, ...prev.slice(1)]);
+  }, [language]);
 
   const ai = new Anthropic({
     apiKey: "", // Replace with your actual Anthropic API key
@@ -65,7 +75,8 @@ export default function ChatbotPage() {
             content: input,
           },
         ],
-        system: `You are a smart financial assistant. Extract spending information from this message and respond ONLY with a JSON object in this exact format (no other text). Some fields can be optional. Extract data that you can; if you cannot find that field, return null:
+        system: `You are a smart financial assistant. You should respond in ${language === 'en' ? 'English' : language === 'gu' ? 'Gujarati' : language === 'mr' ? 'Marathi' : 'Hindi'} language only.
+Extract spending information from this message and respond ONLY with a JSON object in this exact format (no other text). Some fields can be optional. Extract data that you can; if you cannot find that field, return null:
 {
   "json": {
     "phoneNumber": "+1234567890",
@@ -74,7 +85,7 @@ export default function ChatbotPage() {
     "methodeOfPayment": "<extract payment method or default to 'Cash'>",
     "receiver": "<extract receiver or store name>"
   },
-  "message": "<write a friendly confirmation message>"
+  "message": "<write a friendly confirmation message in ${language === 'en' ? 'English' : language === 'gu' ? 'Gujarati' : language === 'mr' ? 'Marathi' : 'Hindi'} language>"
 }`,
       });
 
@@ -86,7 +97,13 @@ export default function ChatbotPage() {
       let message = JSON.parse(assistantMessage);
 
       if (message.message === undefined || "") {
-        message.message = "I'm sorry, I couldn't understand your request.";
+        message.message = language === 'en' 
+          ? "I'm sorry, I couldn't understand your request."
+          : language === 'gu'
+          ? "માફ કરશો, હું તમારી વિનંતી સમજી શક્યો નથી."
+          : language === 'mr'
+          ? "माफ करा, मला तुमची विनंती समजली नाही."
+          : "क्षमा करें, मैं आपका अनुरोध समझ नहीं पाया।";
       }
 
       // Update the messages state with the assistant's response
@@ -99,7 +116,13 @@ export default function ChatbotPage() {
       setMessages((prev) => [
         ...prev,
         {
-          text: "Sorry, I encountered an error. Please try again.",
+          text: language === 'en'
+            ? "Sorry, I encountered an error. Please try again."
+            : language === 'gu'
+            ? "માફ કરશો, એક ભૂલ આવી. કૃપા કરી ફરી પ્રયાસ કરો."
+            : language === 'mr'
+            ? "क्षमस्व, एक त्रुटी आली. कृपया पुन्हा प्रयत्न करा."
+            : "क्षमा करें, एक त्रुटि आई। कृपया पुनः प्रयास करें।",
           isUser: false,
         },
       ]);
@@ -133,7 +156,7 @@ export default function ChatbotPage() {
               color: primaryColor,
             }}
           >
-            Chatbot
+            {t('chatbotTitle')}
           </ThemedText>
         </View>
         <ScrollView
@@ -189,7 +212,7 @@ export default function ChatbotPage() {
           <TextInput
             value={input}
             onChangeText={setInput}
-            placeholder="Ask about your finances..."
+            placeholder={t('chatbotPlaceholder')}
             placeholderTextColor={
               colorScheme === "dark" ? "#666666" : "#999999"
             }
@@ -212,7 +235,7 @@ export default function ChatbotPage() {
               alignItems: "center",
             }}
           >
-            <ThemedText style={{ color: "#FFFFFF" }}>Send</ThemedText>
+            <ThemedText style={{ color: "#FFFFFF" }}>{t('chatbotSend')}</ThemedText>
           </Pressable>
         </View>
       </ThemedView>
