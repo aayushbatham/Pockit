@@ -14,6 +14,7 @@ import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { useRouter } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useGetTransactions } from '@/modules/hooks/use-get-transcations';
 
 // Mock data service
 const mockUserData = [
@@ -97,6 +98,7 @@ export default function HomePage() {
   const [userData, setUserData] = useState<UserData>(mockUserData[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { data: transactions, isLoading: transactionsLoading, error: transactionsError } = useGetTransactions();
 
   const colorScheme = useColorScheme();
   const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
@@ -149,6 +151,7 @@ export default function HomePage() {
     );
   }
 
+  // Update the transactions section in the return statement
   return (
     <ScrollView
       style={[styles.container, { backgroundColor }]}
@@ -233,40 +236,64 @@ export default function HomePage() {
           </Pressable>
         </View>
 
-        {/* Transaction Items */}
-        <TransactionItem
-          icon="food"
-          title="Dinner"
-          amount="-$89.69"
-          time="Today, 12:30 AM"
-          type="expense"
-        />
-        <TransactionItem
-          icon="briefcase"
-          title="Design Project"
-          amount="+$1500.00"
-          time="Yesterday, 08:10 AM"
-          type="income"
-        />
-        <TransactionItem
-          icon="medical-bag"
-          title="Medicine"
-          amount="-$369.54"
-          time="Today, 12:30 AM"
-          type="expense"
-        />
+        {transactionsLoading ? (
+          <LoadingSpinner />
+        ) : transactionsError ? (
+          <ThemedText style={{ color: 'red', textAlign: 'center', padding: 16 }}>
+            Failed to load transactions
+          </ThemedText>
+        ) : (
+          transactions?.map((transaction) => (
+            <TransactionItem
+              key={transaction.id}
+              icon={getIconForCategory(transaction.spentCategory)}
+              title={transaction.spentCategory}
+              amount={`${transaction.amount < 0 ? '-' : '+'}₹${Math.abs(transaction.amount).toLocaleString()}`}
+              time={new Date(transaction.createdAt).toLocaleString()}
+              type={transaction.amount < 0 ? 'expense' : 'income'}
+              receiver={transaction.receiver}
+            />
+          ))
+        )}
       </View>
     </ScrollView>
   );
 }
 
-// New Transaction Item Component
-function TransactionItem({ icon, title, amount, time, type }: any) {
+function getIconForCategory(category: string): string {
+  const categoryIcons: Record<string, string> = {
+    'Food': 'food',
+    'Travel': 'airplane',
+    'Shopping': 'shopping',
+    'Entertainment': 'movie',
+    'Health': 'medical-bag',
+    'Bills': 'file-document',
+    'Salary': 'briefcase',
+    'Transfer': 'bank-transfer',
+  };
+
+  return categoryIcons[category] || 'cash';
+}
+
+function TransactionItem({ icon, title, amount, time, type, receiver }: {
+  icon: string;
+  title: string;
+  amount: string;
+  time: string;
+  type: 'expense' | 'income';
+  receiver?: string;
+}) {
   const colorScheme = useColorScheme();
-  const iconBgColors = {
+  const iconBgColors: Record<string, string> = {
     food: "#FF6B6B",
     briefcase: "#4ECDC4",
     "medical-bag": "#45B7D1",
+    shopping: "#FFA94D",
+    airplane: "#845EF7",
+    movie: "#FF922B",
+    "file-document": "#5C7CFA",
+    "bank-transfer": "#20C997",
+    cash: "#7950F2",
   };
 
   return (
@@ -274,13 +301,16 @@ function TransactionItem({ icon, title, amount, time, type }: any) {
       <View
         style={[
           styles.transactionIcon,
-          { backgroundColor: iconBgColors[icon as keyof typeof iconBgColors] },
+          { backgroundColor: iconBgColors[icon] || "#7950F2" },
         ]}
       >
-        <MaterialCommunityIcons name={icon} size={24} color="white" />
+        <MaterialCommunityIcons name={icon as any} size={24} color="white" />
       </View>
       <View style={styles.transactionInfo}>
         <ThemedText style={styles.transactionTitle}>{title}</ThemedText>
+        {receiver && (
+          <ThemedText style={styles.transactionReceiver}>{receiver}</ThemedText>
+        )}
         <ThemedText style={styles.transactionTime}>{time}</ThemedText>
       </View>
       <ThemedText
@@ -301,6 +331,11 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingBottom: 40,
+  },
+  transactionReceiver: {
+    fontSize: 12,
+    opacity: 0.7,
+    marginTop: 2,
   },
   topBar: {
     flexDirection: "row",
