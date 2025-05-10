@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, View, StyleSheet, Pressable } from "react-native";
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Pressable,
+  Platform,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { DarkTheme, DefaultTheme } from "@react-navigation/native";
-import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { useRouter } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // Mock data service
 const mockUserData = [
@@ -85,6 +93,7 @@ interface UserData {
 }
 
 export default function HomePage() {
+  const router = useRouter();
   const [userData, setUserData] = useState<UserData>(mockUserData[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -92,10 +101,10 @@ export default function HomePage() {
   const colorScheme = useColorScheme();
   const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
 
-  const backgroundColor = theme.colors.background;
-  const textColor = theme.colors.text;
-  const primaryColor = "#8B5CF6"; // Changed to always use purple
-  const cardBgColor = colorScheme === "dark" ? "#1E1E1E" : "#F3F4F6";
+  const backgroundColor = colorScheme === "dark" ? "#121212" : "#F8F9FA";
+  const textColor = colorScheme === "dark" ? "#FFFFFF" : "#000000";
+  const primaryColor = "#8B5CF6";
+  const cardBgColor = colorScheme === "dark" ? "#1E1E1E" : "#FFFFFF";
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -120,7 +129,6 @@ export default function HomePage() {
   }, []);
 
   const handleChatPress = () => {
-    // Simulate chat functionality
     console.log("Chat button pressed");
   };
 
@@ -142,77 +150,148 @@ export default function HomePage() {
   }
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor }]}>
-      <ThemedView style={styles.header}>
-        <View style={styles.welcomeSection}>
-          <ThemedText style={styles.welcomeText}>
-            🙏 Namaste, {userData.name}! Here's your money mood today
-          </ThemedText>
-          <View style={[styles.avatarBadge, { backgroundColor: primaryColor }]}>
-            <ThemedText>👤 {userData.spendingPersonality}</ThemedText>
-          </View>
-        </View>
-      </ThemedView>
+    <ScrollView
+      style={[styles.container, { backgroundColor }]}
+      contentContainerStyle={styles.contentContainer}
+    >
+      <View style={styles.topBar}>
+        <Pressable style={styles.iconButton}>
+          <MaterialCommunityIcons name="apps" size={24} color={textColor} />
+        </Pressable>
+        <Pressable
+          style={[
+            styles.accountSelector,
+            { backgroundColor: colorScheme === "dark" ? "#2D2D2D" : "#F3F4F6" },
+          ]}
+        >
+          <ThemedText style={styles.accountText}>All account</ThemedText>
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={20}
+            color={textColor}
+          />
+        </Pressable>
+        <Pressable style={styles.iconButton}>
+          <MaterialCommunityIcons
+            name="bell-outline"
+            size={24}
+            color={textColor}
+          />
+        </Pressable>
+      </View>
 
-      <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-        <ThemedText style={styles.cardTitle}>Today's Snapshot 📊</ThemedText>
-        <ThemedText style={[styles.amount, { color: primaryColor }]}>
-          ₹{userData.todaySpend}
+      <View style={styles.balanceSection}>
+        <ThemedText style={styles.balanceLabel}>Total Balance</ThemedText>
+        <ThemedText style={styles.balanceAmount}>
+          ₹{userData.todaySpend.toLocaleString()}
         </ThemedText>
-        <ThemedText style={styles.subtitle}>Total Spend Today</ThemedText>
-        {userData.budgetTip && (
-          <View
-            style={[
-              styles.tipContainer,
-              { backgroundColor: primaryColor + "20" },
-            ]}
-          >
-            <ThemedText style={styles.tip}>
-              ⚠️ Lakshya Tip: {userData.budgetTip}
+      </View>
+
+      <View style={styles.statsContainer}>
+        <View style={[styles.statsCard, { backgroundColor: cardBgColor }]}>
+          <ThemedText style={styles.statsLabel}>Expense</ThemedText>
+          <ThemedText style={styles.statsAmount}>₹24,589</ThemedText>
+          <View style={styles.statsChange}>
+            <MaterialCommunityIcons name="arrow-up" size={16} color="red" />
+            <ThemedText style={[styles.changeText, { color: "red" }]}>
+              13.39% in this month
             </ThemedText>
           </View>
-        )}
-      </ThemedView>
-
-      <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-        <ThemedText style={styles.cardTitle}>Weekly Budget 💰</ThemedText>
-        <View style={styles.budgetRing}>
-          <ThemedText style={[styles.budgetText, { color: primaryColor }]}>
-            {userData.weeklyBudgetPercentage}%
-          </ThemedText>
         </View>
-      </ThemedView>
 
-      {userData.upcomingPayment && (
-        <LinearGradient
-          colors={[primaryColor, primaryColor + "CC"]}
-          style={styles.insightBanner}
-        >
-          <ThemedText style={styles.insightText}>
-            🏠 Looks like your {userData.upcomingPayment.type} is due in{" "}
-            {userData.upcomingPayment.daysLeft} days
-          </ThemedText>
-        </LinearGradient>
-      )}
+        <View style={[styles.statsCard, { backgroundColor: cardBgColor }]}>
+          <ThemedText style={styles.statsLabel}>Income</ThemedText>
+          <ThemedText style={styles.statsAmount}>₹40,432</ThemedText>
+          <View style={styles.statsChange}>
+            <MaterialCommunityIcons name="arrow-up" size={16} color="green" />
+            <ThemedText style={[styles.changeText, { color: "green" }]}>
+              5.22% in this month
+            </ThemedText>
+          </View>
+        </View>
+      </View>
 
-      {userData.festivalAlert && (
-        <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-          <ThemedText style={styles.cardTitle}>🎯 Festival Alert</ThemedText>
-          <ThemedText style={styles.festivalText}>
-            {userData.festivalAlert.message}
-          </ThemedText>
-        </ThemedView>
-      )}
-
-      <Pressable
-        style={[styles.chatButton, { backgroundColor: primaryColor }]}
-        onPress={handleChatPress}
-      >
-        <ThemedText style={styles.chatButtonText}>
-          💬 Ask assistant anything
+      <View style={[styles.insightCard, { backgroundColor: cardBgColor }]}>
+        <View style={styles.insightHeader}>
+          <MaterialCommunityIcons
+            name="star-four-points"
+            size={20}
+            color={primaryColor}
+          />
+          <ThemedText style={styles.insightTitle}>AI Insight</ThemedText>
+        </View>
+        <ThemedText style={styles.insightText}>
+          Great job Rahul! You've saved 20% more than last month.
         </ThemedText>
-      </Pressable>
+      </View>
+
+      <View style={styles.transactionsSection}>
+        <View style={styles.sectionHeader}>
+          <ThemedText style={styles.sectionTitle}>Transactions</ThemedText>
+          <Pressable>
+            <ThemedText style={styles.showAllText}>Show All</ThemedText>
+          </Pressable>
+        </View>
+
+        {/* Transaction Items */}
+        <TransactionItem
+          icon="food"
+          title="Dinner"
+          amount="-$89.69"
+          time="Today, 12:30 AM"
+          type="expense"
+        />
+        <TransactionItem
+          icon="briefcase"
+          title="Design Project"
+          amount="+$1500.00"
+          time="Yesterday, 08:10 AM"
+          type="income"
+        />
+        <TransactionItem
+          icon="medical-bag"
+          title="Medicine"
+          amount="-$369.54"
+          time="Today, 12:30 AM"
+          type="expense"
+        />
+      </View>
     </ScrollView>
+  );
+}
+
+// New Transaction Item Component
+function TransactionItem({ icon, title, amount, time, type }: any) {
+  const colorScheme = useColorScheme();
+  const iconBgColors = {
+    food: "#FF6B6B",
+    briefcase: "#4ECDC4",
+    "medical-bag": "#45B7D1",
+  };
+
+  return (
+    <View style={styles.transactionItem}>
+      <View
+        style={[
+          styles.transactionIcon,
+          { backgroundColor: iconBgColors[icon as keyof typeof iconBgColors] },
+        ]}
+      >
+        <MaterialCommunityIcons name={icon} size={24} color="white" />
+      </View>
+      <View style={styles.transactionInfo}>
+        <ThemedText style={styles.transactionTitle}>{title}</ThemedText>
+        <ThemedText style={styles.transactionTime}>{time}</ThemedText>
+      </View>
+      <ThemedText
+        style={[
+          styles.transactionAmount,
+          { color: type === "expense" ? "#FF6B6B" : "#4ECDC4" },
+        ]}
+      >
+        {amount}
+      </ThemedText>
+    </View>
   );
 }
 
@@ -220,85 +299,155 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
-    padding: 20,
-    paddingTop: 60,
+  contentContainer: {
+    paddingBottom: 40,
   },
-  welcomeSection: {
+  topBar: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingHorizontal: 16,
+    paddingTop: Platform.OS === "ios" ? 60 : 40,
+    paddingBottom: 10,
+    backgroundColor: "transparent",
   },
-  welcomeText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    flex: 1,
+  iconButton: {
+    padding: 12,
+    borderRadius: 12,
   },
-  avatarBadge: {
+  accountSelector: {
+    flexDirection: "row",
+    alignItems: "center",
     padding: 8,
+    paddingHorizontal: 16,
     borderRadius: 20,
-  },
-  card: {
-    borderRadius: 15,
-    padding: 20,
-    margin: 10,
+    elevation: 1,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    elevation: 3,
+    shadowRadius: 2,
   },
-  cardTitle: {
+  accountText: {
+    marginRight: 8,
+    fontWeight: "600",
+    fontSize: 15,
+  },
+  balanceSection: {
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    alignItems: "center",
+  },
+  balanceLabel: {
     fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  amount: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginVertical: 10,
-  },
-  subtitle: {
-    fontSize: 14,
     opacity: 0.7,
+    marginBottom: 12,
+    textAlign: "center",
   },
-  tipContainer: {
-    padding: 10,
-    borderRadius: 10,
+  balanceAmount: {
+    fontSize: 42,
+    fontWeight: "bold",
+    textAlign: "center",
+    includeFontPadding: false,
+    lineHeight: 50,
+  },
+  statsContainer: {
+    flexDirection: "row",
+    paddingHorizontal: 16,
+    gap: 12,
     marginTop: 10,
   },
-  tip: {
-    fontSize: 14,
-  },
-  budgetRing: {
-    alignItems: "center",
-    justifyContent: "center",
-    height: 150,
-  },
-  budgetText: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  insightBanner: {
-    margin: 10,
+  statsCard: {
+    flex: 1,
     padding: 20,
-    borderRadius: 15,
+    borderRadius: 20,
+    elevation: 1,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
-  insightText: {
-    fontSize: 16,
-    fontWeight: "500",
-  },
-  festivalText: {
+  statsLabel: {
     fontSize: 14,
     opacity: 0.7,
   },
-  chatButton: {
-    margin: 10,
-    padding: 15,
-    borderRadius: 25,
+  statsAmount: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginVertical: 4,
+  },
+  statsChange: {
+    flexDirection: "row",
     alignItems: "center",
   },
-  chatButtonText: {
+  changeText: {
+    fontSize: 12,
+    marginLeft: 4,
+  },
+  insightCard: {
+    margin: 16,
+    padding: 16,
+    borderRadius: 16,
+  },
+  insightHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  insightTitle: {
+    marginLeft: 8,
+    fontWeight: "600",
+  },
+  insightText: {
+    fontSize: 14,
+    opacity: 0.8,
+  },
+  transactionsSection: {
+    paddingHorizontal: 16,
+    marginTop: 20,
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  showAllText: {
+    color: "#8B5CF6",
+    fontWeight: "500",
+  },
+  transactionItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(0,0,0,0.05)",
+  },
+  transactionIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  transactionInfo: {
+    flex: 1,
+    marginLeft: 12,
+  },
+  transactionTitle: {
     fontSize: 16,
     fontWeight: "500",
+  },
+  transactionTime: {
+    fontSize: 12,
+    opacity: 0.5,
+    marginTop: 2,
+  },
+  transactionAmount: {
+    fontSize: 16,
+    fontWeight: "600",
   },
 });

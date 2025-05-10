@@ -84,12 +84,6 @@ export default function Layout() {
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={authContext}>
         <SafeAreaProvider>
-          <SafeAreaView
-            style={{
-              flex: 1,
-              backgroundColor: "black",
-            }}
-          >
             <ThemeProvider value={theme}>
               <View style={styles.container}>
                 <View style={styles.content}>
@@ -99,7 +93,6 @@ export default function Layout() {
               </View>
               <StatusBar style="auto" />
             </ThemeProvider>
-          </SafeAreaView>
         </SafeAreaProvider>
       </AuthContext.Provider>
     </QueryClientProvider>
