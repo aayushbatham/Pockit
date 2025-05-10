@@ -31,14 +31,12 @@ public class TransactionController {
 
     @GetMapping
     public ResponseEntity<List<Transaction>> getAllTransactions() {
-        List<Transaction> transactions = transactionService.getAllTransactions();
-        return ResponseEntity.ok(transactions);
+        return ResponseEntity.ok(transactionService.getAllTransactions());
     }
 
     @GetMapping("/phone/{phoneNumber}")
-    public ResponseEntity<List<Transaction>> getTransactionsByPhoneNumber(@PathVariable String phoneNumber) {
-        List<Transaction> transactions = transactionService.getTransactionsByPhoneNumber(phoneNumber);
-        return ResponseEntity.ok(transactions);
+    public ResponseEntity<List<Transaction>> getTransactionsByPhone(@PathVariable String phoneNumber) {
+        return ResponseEntity.ok(transactionService.getTransactionsByPhoneNumber(phoneNumber));
     }
 
     @GetMapping("/{id}")
