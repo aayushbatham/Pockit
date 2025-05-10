@@ -69,7 +69,11 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
 
         <TouchableOpacity
           style={styles.tabButton}
-          onPress={() => router.push("/")}
+          onPress={() => {
+            router.push("/(charts)");
+
+
+          }}
         >
           <MaterialCommunityIcons
             name="chart-pie"
