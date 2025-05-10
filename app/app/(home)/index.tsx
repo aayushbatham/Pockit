@@ -124,15 +124,10 @@ export default function HomePage() {
     };
 
     fetchUserData();
-    // Refresh data every 30 seconds
     const interval = setInterval(fetchUserData, 30000);
 
     return () => clearInterval(interval);
   }, []);
-
-  const handleChatPress = () => {
-    console.log("Chat button pressed");
-  };
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -151,7 +146,6 @@ export default function HomePage() {
     );
   }
 
-  // Update the transactions section in the return statement
   return (
     <ScrollView
       style={[styles.container, { backgroundColor }]}
@@ -203,7 +197,7 @@ export default function HomePage() {
         </View>
 
         <View style={[styles.statsCard, { backgroundColor: cardBgColor }]}>
-          <ThemedText style={styles.statsLabel}>Income</ThemedText>
+          <ThemedText style={styles.statsLabel}>You Saved</ThemedText>
           <ThemedText style={styles.statsAmount}>₹40,432</ThemedText>
           <View style={styles.statsChange}>
             <MaterialCommunityIcons name="arrow-up" size={16} color="green" />
@@ -224,7 +218,7 @@ export default function HomePage() {
           <ThemedText style={styles.insightTitle}>AI Insight</ThemedText>
         </View>
         <ThemedText style={styles.insightText}>
-          Great job Rahul! You've saved 20% more than last month.
+          Great job! You've saved 20% more than last month.
         </ThemedText>
       </View>
 
@@ -249,7 +243,7 @@ export default function HomePage() {
               icon={getIconForCategory(transaction.spentCategory)}
               title={transaction.spentCategory}
               amount={`${transaction.amount < 0 ? '-' : '+'}₹${Math.abs(transaction.amount).toLocaleString()}`}
-              time={new Date(transaction.createdAt).toLocaleString()}
+              time={new Date(transaction.date).toLocaleString()}
               type={transaction.amount < 0 ? 'expense' : 'income'}
               receiver={transaction.receiver}
             />

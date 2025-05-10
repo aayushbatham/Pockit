@@ -18,6 +18,7 @@ import { isAuthenticated } from "@/utils/storage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { createContext } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 export const AuthContext = createContext({
   signIn: (token: string) => {},
   signOut: () => {},
@@ -81,6 +82,7 @@ export default function Layout() {
   }
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={authContext}>
         <SafeAreaProvider>
@@ -96,6 +98,7 @@ export default function Layout() {
         </SafeAreaProvider>
       </AuthContext.Provider>
     </QueryClientProvider>
+    </GestureHandlerRootView>
   );
 }
 
