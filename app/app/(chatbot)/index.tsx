@@ -10,13 +10,14 @@ import {
 } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
-import { GoogleGenAI } from "@google/genai";
 import { GEMKEY } from "@/constants/keys";
+import Anthropic from "@anthropic-ai/sdk";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
 interface Message {
   text: string;
   isUser: boolean;
+  data?: any; // optional for storing structured info
 }
 
 export default function ChatbotPage() {
@@ -31,7 +32,10 @@ export default function ChatbotPage() {
   const colorScheme = useColorScheme();
   const primaryColor = "#8B5CF6";
 
-  const ai = new GoogleGenAI({ apiKey: GEMKEY });
+  const ai = new Anthropic({
+    apiKey:
+      "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", // Replace with your actual Anthropic API key
+  });
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -42,15 +46,54 @@ export default function ChatbotPage() {
     setIsLoading(true);
 
     try {
-      const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
-        contents: input,
+      // Define the type for a text content block
+      type TextContentBlock = {
+        type: "text";
+        text: string;
+      };
+
+      // Type guard to check if a content block is of type 'text'
+      function isTextBlock(block: any): block is TextContentBlock {
+        return block.type === "text" && typeof block.text === "string";
+      }
+
+      const response = await ai.messages.create({
+        model: "claude-3-opus-20240229",
+        max_tokens: 1000,
+        messages: [
+          {
+            role: "user",
+            content: input,
+          },
+        ],
+        system: `You are a smart financial assistant. Extract spending information from this message and respond ONLY with a JSON object in this exact format (no other text). Some fields can be optional. Extract data that you can; if you cannot find that field, return null:
+{
+  "json": {
+    "phoneNumber": "+1234567890",
+    "amount": <extract number>,
+    "spentCategory": "<extract category>",
+    "methodeOfPayment": "<extract payment method or default to 'Cash'>",
+    "receiver": "<extract receiver or store name>"
+  },
+  "message": "<write a friendly confirmation message>"
+}`,
       });
 
-      const aiMessage = { text: response.text, isUser: false };
+      // Extract and concatenate text from all text content blocks
+      const assistantMessage = response.content
+        .filter(isTextBlock)
+        .map((block: any) => block.text)
+        .join("");
+      let message = JSON.parse(assistantMessage);
+
+      if (message.message === undefined || "") {
+        message.message = "I'm sorry, I couldn't understand your request.";
+      }
+
+      // Update the messages state with the assistant's response
       setMessages((prev) => [
         ...prev,
-        { text: response.text || "", isUser: false },
+        { text: message.message, isUser: false },
       ]);
     } catch (error) {
       console.error("Error:", error);
@@ -81,14 +124,14 @@ export default function ChatbotPage() {
             backgroundColor: colorScheme === "dark" ? "#000000" : "#FFFFFF",
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
           }}
         >
-          <ThemedText 
+          <ThemedText
             style={{
               fontSize: 20,
               fontWeight: "600",
-              color: primaryColor
+              color: primaryColor,
             }}
           >
             Chatbot
