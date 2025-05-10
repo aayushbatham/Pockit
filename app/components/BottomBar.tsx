@@ -36,7 +36,7 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
       
       <TouchableOpacity 
         style={styles.tabButton} 
-        onPress={() => router.push('/(search)')}
+        onPress={() => router.push('/chatbot')}
       >
         <MaterialCommunityIcons 
           name="magnify" 
