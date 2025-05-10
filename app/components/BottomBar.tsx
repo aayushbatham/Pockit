@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { useRouter, usePathname } from 'expo-router';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -11,48 +11,41 @@ interface BottomBarProps {
 export function BottomBar({ primaryColor }: BottomBarProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const colorScheme = useColorScheme();
   
-  const isActive = (path: string) => {
-    return pathname.startsWith(path);
-  };
-  
-  // Apple-inspired dark theme colors
-  const inactiveColor = "#8E8E93";
-  const backgroundColor = "#1C1C1E";
+  const isActive = (path: string) => pathname?.startsWith(path);
   
   return (
-    <View style={[styles.container, { backgroundColor }]}>
+    <View style={styles.container}>
       <TouchableOpacity 
         style={styles.tabButton} 
         onPress={() => router.push('/(home)')}
       >
         <MaterialCommunityIcons 
-          name={isActive('/(home)') ? "home" : "home-outline"} 
-          size={22} 
-          color={isActive('/(home)') ? primaryColor : inactiveColor} 
+          name="home" 
+          size={26} 
+          color={isActive('/(home)') ? "#FFFFFF" : "#666666"} 
         />
       </TouchableOpacity>
       
       <TouchableOpacity 
         style={styles.tabButton} 
-        onPress={() => router.push('/chatbot')}
+        onPress={() => router.push('/stats')}
       >
         <MaterialCommunityIcons 
-          name="magnify" 
-          size={22} 
-          color={isActive('/(search)') ? primaryColor : inactiveColor} 
+          name="chart-pie" 
+          size={26} 
+          color={isActive('/stats') ? "#FFFFFF" : "#666666"} 
         />
       </TouchableOpacity>
       
       <View style={styles.addButtonContainer}>
         <TouchableOpacity 
-          style={[styles.addButton, { backgroundColor: primaryColor }]}
-          onPress={() => console.log('Add button pressed')}
+          style={styles.addButton}
+          onPress={() => router.push('/add')}
         >
           <MaterialCommunityIcons 
             name="plus" 
-            size={20} 
+            size={32} 
             color="#FFFFFF" 
           />
         </TouchableOpacity>
@@ -60,12 +53,12 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
       
       <TouchableOpacity 
         style={styles.tabButton} 
-        onPress={() => router.push('/(notifications)')}
+        onPress={() => router.push('/wallet')}
       >
         <MaterialCommunityIcons 
-          name="bell-outline" 
-          size={22} 
-          color={isActive('/(notifications)') ? primaryColor : inactiveColor} 
+          name="wallet" 
+          size={26} 
+          color={isActive('/wallet') ? "#FFFFFF" : "#666666"} 
         />
       </TouchableOpacity>
       
@@ -74,9 +67,9 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
         onPress={() => router.push('/(profile)')}
       >
         <MaterialCommunityIcons 
-          name={isActive('/(profile)') ? "account" : "account-outline"} 
-          size={22} 
-          color={isActive('/(profile)') ? primaryColor : inactiveColor} 
+          name="account" 
+          size={26} 
+          color={isActive('/profile') ? "#FFFFFF" : "#666666"} 
         />
       </TouchableOpacity>
     </View>
@@ -86,11 +79,13 @@ export function BottomBar({ primaryColor }: BottomBarProps) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 50,
+    height: Platform.OS === 'ios' ? 85 : 85,
+    paddingBottom: Platform.OS === 'ios' ? 20 : 0,
     alignItems: 'center',
     justifyContent: 'space-around',
-    borderTopWidth: 0.5,
-    borderTopColor: '#2C2C2E',
+    backgroundColor: '#000000',
+    borderTopWidth: 0,
+    paddingHorizontal: 16,
   },
   tabButton: {
     flex: 1,
@@ -101,13 +96,24 @@ const styles = StyleSheet.create({
   addButtonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 50,
+    width: 75,
+    height: Platform.OS === 'ios' ? 85 : 65,
+    marginTop: -40,
   },
   addButton: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#2C2C2E',
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
   },
 });
