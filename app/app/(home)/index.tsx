@@ -5,7 +5,8 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { DarkTheme, DefaultTheme } from "@react-navigation/native";
-import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { useRouter } from "expo-router";
 
 // Mock data service
 const mockUserData = [
@@ -85,6 +86,7 @@ interface UserData {
 }
 
 export default function HomePage() {
+  const router = useRouter();
   const [userData, setUserData] = useState<UserData>(mockUserData[0]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -120,8 +122,7 @@ export default function HomePage() {
   }, []);
 
   const handleChatPress = () => {
-    // Simulate chat functionality
-    console.log("Chat button pressed");
+    router.push("/(chatbot)");
   };
 
   if (isLoading) {
