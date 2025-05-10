@@ -6,6 +6,8 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 interface ProfileData {
   name: string;
@@ -17,7 +19,6 @@ interface ProfileData {
     total: number;
   };
   rewards: string;
-  language: "English" | "Hindi";
   smsAccess: boolean;
   upiSync: boolean;
   insights: string[];
@@ -33,7 +34,6 @@ const mockProfileData: ProfileData = {
     total: 50000,
   },
   rewards: "Flipkart ₹200 voucher",
-  language: "English",
   smsAccess: true,
   upiSync: true,
   insights: [
@@ -46,6 +46,7 @@ export default function ProfilePage() {
   const [profileData, setProfileData] = useState<ProfileData>(mockProfileData);
   const colorScheme = useColorScheme();
   const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
+  const { t } = useLanguage();
 
   const backgroundColor = theme.colors.background;
   const textColor = theme.colors.text;
@@ -69,13 +70,13 @@ export default function ProfilePage() {
           style={[styles.editButton, { backgroundColor: primaryColor }]}
           onPress={() => console.log("Edit pressed")}
         >
-          <ThemedText style={styles.editButtonText}>Edit Profile</ThemedText>
+          <ThemedText style={styles.editButtonText}>{t('editProfile')}</ThemedText>
         </Pressable>
       </ThemedView>
 
       {/* Personality Section */}
       <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-        <ThemedText style={styles.cardTitle}>Spending Personality 🎭</ThemedText>
+        <ThemedText style={styles.cardTitle}>{t('spendingPersonality')} 🎭</ThemedText>
         <ThemedText style={styles.description}>
           {profileData.personalityDescription}
         </ThemedText>
@@ -83,7 +84,7 @@ export default function ProfilePage() {
 
       {/* Goals Section */}
       <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-        <ThemedText style={styles.cardTitle}>Money Goals 🎯</ThemedText>
+        <ThemedText style={styles.cardTitle}>{t('moneyGoals')} 🎯</ThemedText>
         <View style={styles.goalProgress}>
           <ThemedText style={styles.goalText}>
             {profileData.goal.item} – {(profileData.goal.saved / profileData.goal.total * 100).toFixed(0)}% saved
@@ -107,18 +108,16 @@ export default function ProfilePage() {
 
       {/* Settings Section */}
       <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-        <ThemedText style={styles.cardTitle}>Settings ⚙️</ThemedText>
-        <View style={styles.settingItem}>
-          <ThemedText>Language</ThemedText>
-          <Pressable
-            style={[styles.languageButton, { backgroundColor: primaryColor + "20" }]}
-            onPress={() => console.log("Language pressed")}
-          >
-            <ThemedText style={{ color: primaryColor }}>{profileData.language}</ThemedText>
-          </Pressable>
+        <ThemedText style={styles.cardTitle}>{t('settings')} ⚙️</ThemedText>
+        
+        {/* Language Section */}
+        <View style={styles.settingSection}>
+          <ThemedText style={styles.settingTitle}>{t('language')}</ThemedText>
+          <LanguageSelector />
         </View>
+
         <View style={styles.settingItem}>
-          <ThemedText>SMS Access</ThemedText>
+          <ThemedText>{t('smsAccess')}</ThemedText>
           <Switch
             value={profileData.smsAccess}
             onValueChange={(value) => 
@@ -128,7 +127,7 @@ export default function ProfilePage() {
           />
         </View>
         <View style={styles.settingItem}>
-          <ThemedText>UPI Sync</ThemedText>
+          <ThemedText>{t('upiSync')}</ThemedText>
           <Switch
             value={profileData.upiSync}
             onValueChange={(value) => 
@@ -141,7 +140,7 @@ export default function ProfilePage() {
 
       {/* Insights Section */}
       <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-        <ThemedText style={styles.cardTitle}>Lakshya Insights 💡</ThemedText>
+        <ThemedText style={styles.cardTitle}>{t('insights')} 💡</ThemedText>
         {profileData.insights.map((insight, index) => (
           <View key={index} style={styles.insightItem}>
             <ThemedText style={styles.insightText}>{insight}</ThemedText>
@@ -192,6 +191,7 @@ const styles = StyleSheet.create({
   editButtonText: {
     fontSize: 16,
     fontWeight: "500",
+    color: "#FFFFFF",
   },
   card: {
     borderRadius: 15,
@@ -243,6 +243,14 @@ const styles = StyleSheet.create({
   rewardText: {
     fontSize: 14,
   },
+  settingSection: {
+    marginBottom: 20,
+  },
+  settingTitle: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 10,
+  },
   settingItem: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -250,11 +258,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: "#E5E7EB",
-  },
-  languageButton: {
-    padding: 8,
-    paddingHorizontal: 15,
-    borderRadius: 20,
   },
   insightItem: {
     paddingVertical: 8,

@@ -14,6 +14,7 @@ import { DarkTheme, DefaultTheme } from "@react-navigation/native";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 import { useRouter } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useGetTransactions } from '@/modules/hooks/use-get-transcations';
 
 // Mock data service
@@ -101,6 +102,7 @@ export default function HomePage() {
   const { data: transactions, isLoading: transactionsLoading, error: transactionsError } = useGetTransactions();
 
   const colorScheme = useColorScheme();
+  const { t } = useLanguage();
   const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
 
   const backgroundColor = colorScheme === "dark" ? "#121212" : "#F8F9FA";
@@ -161,7 +163,7 @@ export default function HomePage() {
             { backgroundColor: colorScheme === "dark" ? "#2D2D2D" : "#F3F4F6" },
           ]}
         >
-          <ThemedText style={styles.accountText}>All account</ThemedText>
+          <ThemedText style={styles.accountText}>{t('home')}</ThemedText>
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -178,7 +180,7 @@ export default function HomePage() {
       </View>
 
       <View style={styles.balanceSection}>
-        <ThemedText style={styles.balanceLabel}>Total Balance</ThemedText>
+        <ThemedText style={styles.balanceLabel}>{t('totalBalance')}</ThemedText>
         <ThemedText style={styles.balanceAmount}>
           ₹{userData.todaySpend.toLocaleString()}
         </ThemedText>
@@ -186,23 +188,23 @@ export default function HomePage() {
 
       <View style={styles.statsContainer}>
         <View style={[styles.statsCard, { backgroundColor: cardBgColor }]}>
-          <ThemedText style={styles.statsLabel}>Expense</ThemedText>
+          <ThemedText style={styles.statsLabel}>{t('expense')}</ThemedText>
           <ThemedText style={styles.statsAmount}>₹24,589</ThemedText>
           <View style={styles.statsChange}>
             <MaterialCommunityIcons name="arrow-up" size={16} color="red" />
             <ThemedText style={[styles.changeText, { color: "red" }]}>
-              13.39% in this month
+              13.39% {t('thisMonth')}
             </ThemedText>
           </View>
         </View>
 
         <View style={[styles.statsCard, { backgroundColor: cardBgColor }]}>
-          <ThemedText style={styles.statsLabel}>You Saved</ThemedText>
+          <ThemedText style={styles.statsLabel}>{t('income')}</ThemedText>
           <ThemedText style={styles.statsAmount}>₹40,432</ThemedText>
           <View style={styles.statsChange}>
             <MaterialCommunityIcons name="arrow-up" size={16} color="green" />
             <ThemedText style={[styles.changeText, { color: "green" }]}>
-              5.22% in this month
+              5.22% {t('thisMonth')}
             </ThemedText>
           </View>
         </View>
@@ -215,7 +217,7 @@ export default function HomePage() {
             size={20}
             color={primaryColor}
           />
-          <ThemedText style={styles.insightTitle}>AI Insight</ThemedText>
+          <ThemedText style={styles.insightTitle}>{t('aiInsight')}</ThemedText>
         </View>
         <ThemedText style={styles.insightText}>
           Great job! You've saved 20% more than last month.
@@ -224,9 +226,9 @@ export default function HomePage() {
 
       <View style={styles.transactionsSection}>
         <View style={styles.sectionHeader}>
-          <ThemedText style={styles.sectionTitle}>Transactions</ThemedText>
+          <ThemedText style={styles.sectionTitle}>{t('transactions')}</ThemedText>
           <Pressable>
-            <ThemedText style={styles.showAllText}>Show All</ThemedText>
+            <ThemedText style={styles.showAllText}>{t('showAll')}</ThemedText>
           </Pressable>
         </View>
 
@@ -278,7 +280,8 @@ function TransactionItem({ icon, title, amount, time, type, receiver }: {
   receiver?: string;
 }) {
   const colorScheme = useColorScheme();
-  const iconBgColors: Record<string, string> = {
+  const { t } = useLanguage();
+  const iconBgColors = {
     food: "#FF6B6B",
     briefcase: "#4ECDC4",
     "medical-bag": "#45B7D1",
@@ -290,22 +293,32 @@ function TransactionItem({ icon, title, amount, time, type, receiver }: {
     cash: "#7950F2",
   };
 
+  // Convert time string to use translations
+  const timeText = time.toLowerCase().includes('today') 
+    ? t('today') 
+    : time.toLowerCase().includes('yesterday')
+    ? t('yesterday')
+    : time;
+
+  // Translate title if it matches a translation key
+  const translatedTitle = t(title.toLowerCase().replace(' ', '') as any) || title;
+
   return (
     <View style={styles.transactionItem}>
       <View
         style={[
           styles.transactionIcon,
-          { backgroundColor: iconBgColors[icon] || "#7950F2" },
+          { backgroundColor: iconBgColors[icon as keyof typeof iconBgColors] || "#7950F2" },
         ]}
       >
         <MaterialCommunityIcons name={icon as any} size={24} color="white" />
       </View>
       <View style={styles.transactionInfo}>
-        <ThemedText style={styles.transactionTitle}>{title}</ThemedText>
+        <ThemedText style={styles.transactionTitle}>{translatedTitle}</ThemedText>
         {receiver && (
           <ThemedText style={styles.transactionReceiver}>{receiver}</ThemedText>
         )}
-        <ThemedText style={styles.transactionTime}>{time}</ThemedText>
+        <ThemedText style={styles.transactionTime}>{timeText}</ThemedText>
       </View>
       <ThemedText
         style={[

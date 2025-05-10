@@ -16,6 +16,7 @@ import { BottomBar } from "@/components/BottomBar";
 import { isAuthenticated } from "@/utils/storage";
 // Add React Query imports
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 import { createContext } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -85,17 +86,19 @@ export default function Layout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
     <QueryClientProvider client={queryClient}>
       <AuthContext.Provider value={authContext}>
-        <SafeAreaProvider>
-            <ThemeProvider value={theme}>
-              <View style={styles.container}>
-                <View style={styles.content}>
-                  <Slot />
+        <LanguageProvider>
+          <SafeAreaProvider>
+              <ThemeProvider value={theme}>
+                <View style={styles.container}>
+                  <View style={styles.content}>
+                    <Slot />
+                  </View>
+                  {isLoggedIn && <BottomBar primaryColor={primaryColor} />}
                 </View>
-                {isLoggedIn && <BottomBar primaryColor={primaryColor} />}
-              </View>
-              <StatusBar style="auto" />
-            </ThemeProvider>
-        </SafeAreaProvider>
+                <StatusBar style="auto" />
+              </ThemeProvider>
+          </SafeAreaProvider>
+        </LanguageProvider>
       </AuthContext.Provider>
     </QueryClientProvider>
     </GestureHandlerRootView>

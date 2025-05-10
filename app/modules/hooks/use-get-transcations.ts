@@ -7,6 +7,7 @@ interface Transaction {
   amount: number;
   spentCategory: string;
   methodeOfPayment: string;
+  date: string;
   receiver: string;
   createdAt: string;
 }
