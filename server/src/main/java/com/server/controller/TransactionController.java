@@ -1,6 +1,7 @@
 package com.server.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class TransactionController {
     }
 
     @GetMapping("/phone/{phoneNumber}")
-    public ResponseEntity<List<Transaction>> getTransactionsByPhone(@PathVariable String phoneNumber) {
+    public ResponseEntity<Optional<Transaction>> getTransactionsByPhone(@PathVariable String phoneNumber) {
         return ResponseEntity.ok(transactionService.getTransactionsByPhoneNumber(phoneNumber));
     }
 
