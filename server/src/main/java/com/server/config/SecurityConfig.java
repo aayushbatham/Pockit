@@ -24,6 +24,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/api/auth/**").permitAll()
                             .requestMatchers("/api/transactions/**").authenticated()
                             .requestMatchers("/api/milestones/**").authenticated()
+                            .requestMatchers("/api/analysis/**").authenticated()
                             .requestMatchers("/error").permitAll()
                             .anyRequest().authenticated();
                 })
