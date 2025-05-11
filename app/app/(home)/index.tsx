@@ -6,7 +6,6 @@ import {
   Pressable,
   Platform,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useColorScheme } from "@/hooks/useColorScheme";
@@ -16,8 +15,10 @@ import { useRouter } from "expo-router";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useGetTransactions } from '@/modules/hooks/use-get-transcations';
+import { useGetMilestone } from '@/modules/hooks/use-get-milestone';
+import { FlatList } from 'react-native';
+import * as Progress from 'react-native-progress';
 
-// Mock data service
 const mockUserData = [
   {
     name: "Rohan",
@@ -100,6 +101,8 @@ export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { data: transactions, isLoading: transactionsLoading, error: transactionsError } = useGetTransactions();
+  const { data: milestones, isLoading: milestonesLoading } = useGetMilestone();
+  console.log("transactions", transactions);
 
   const colorScheme = useColorScheme();
   const { t } = useLanguage();
@@ -199,7 +202,7 @@ export default function HomePage() {
         </View>
 
         <View style={[styles.statsCard, { backgroundColor: cardBgColor }]}>
-          <ThemedText style={styles.statsLabel}>{t('income')}</ThemedText>
+          <ThemedText style={styles.statsLabel}>{t('savings')}</ThemedText>
           <ThemedText style={styles.statsAmount}>₹40,432</ThemedText>
           <View style={styles.statsChange}>
             <MaterialCommunityIcons name="arrow-up" size={16} color="green" />
@@ -222,6 +225,55 @@ export default function HomePage() {
         <ThemedText style={styles.insightText}>
           Great job! You've saved 20% more than last month.
         </ThemedText>
+      </View>
+
+      <View style={styles.milestonesSection}>
+        <View style={styles.sectionHeader}>
+          <ThemedText style={styles.sectionTitle}>{t('milestones')}</ThemedText>
+        </View>
+
+        {milestonesLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <FlatList
+            data={milestones}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => (
+              <View style={[styles.milestoneCard, { backgroundColor: cardBgColor }]}>
+                <View style={styles.milestoneHeader}>
+                  <MaterialCommunityIcons name="flag-checkered" size={20} color={primaryColor} />
+                  <ThemedText style={styles.milestoneTitle}>{t('savingsGoal')}</ThemedText>
+                </View>
+
+                <View style={styles.milestoneAmount}>
+                  <ThemedText style={styles.savedAmount}>
+                    ₹{Number(item.savedAmount).toLocaleString()}
+                  </ThemedText>
+                  <ThemedText style={styles.goalAmount}>
+                    / ₹{Number(item.goalAmount).toLocaleString()}
+                  </ThemedText>
+                </View>
+
+                <Progress.Bar
+                  progress={Number(item.savedAmount) / Number(item.goalAmount)}
+                  width={null}
+                  color={primaryColor}
+                  unfilledColor={colorScheme === 'dark' ? '#333' : '#E5E7EB'}
+                  borderWidth={0}
+                  height={8}
+                  style={styles.progressBar}
+                />
+
+                <ThemedText style={styles.milestoneDuration}>
+                  {item.duration}
+                </ThemedText>
+              </View>
+            )}
+            keyExtractor={item => item.id}
+            contentContainerStyle={styles.milestonesContent}
+          />
+        )}
       </View>
 
       <View style={styles.transactionsSection}>
@@ -293,14 +345,12 @@ function TransactionItem({ icon, title, amount, time, type, receiver }: {
     cash: "#7950F2",
   };
 
-  // Convert time string to use translations
-  const timeText = time.toLowerCase().includes('today') 
-    ? t('today') 
+  const timeText = time.toLowerCase().includes('today')
+    ? t('today')
     : time.toLowerCase().includes('yesterday')
-    ? t('yesterday')
-    : time;
+      ? t('yesterday')
+      : time;
 
-  // Translate title if it matches a translation key
   const translatedTitle = t(title.toLowerCase().replace(' ', '') as any) || title;
 
   return (
@@ -368,6 +418,56 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
+  },
+  milestonesSection: {
+    marginTop: 16,
+  },
+  milestonesContent: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
+  milestoneCard: {
+    width: 280,
+    padding: 16,
+    borderRadius: 16,
+    marginRight: 12,
+    elevation: 1,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+  },
+  milestoneHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+    padding: 4,
+  },
+  milestoneTitle: {
+    marginLeft: 8,
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  milestoneAmount: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    marginBottom: 12,
+  },
+  savedAmount: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  goalAmount: {
+    fontSize: 16,
+    opacity: 0.7,
+    marginLeft: 4,
+  },
+  progressBar: {
+    marginBottom: 12,
+  },
+  milestoneDuration: {
+    fontSize: 14,
+    opacity: 0.7,
   },
   accountText: {
     marginRight: 8,

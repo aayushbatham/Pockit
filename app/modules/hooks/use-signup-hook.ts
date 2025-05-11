@@ -11,7 +11,7 @@ interface SignupResponse {
   message?: string;
   token?: string;
   user?: {
-    id: string;
+    id?: string;
     name: string;
     phone: string;
   };
@@ -36,7 +36,11 @@ const signupUser = async (userData: SignupData): Promise<SignupResponse> => {
   return {
     success: true,
     message: 'Registration successful!',
-    token: data.jwt,
+    token: data.token,
+    user: {
+      name: data.user.name,
+      phone: data.user.phone,
+    },
   };
 };
 

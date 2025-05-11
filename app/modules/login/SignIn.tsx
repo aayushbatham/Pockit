@@ -14,7 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import Button from '@/components/Button';
 import { useSignup } from '@/modules/hooks/use-signup-hook';
-import { setAuthToken } from '@/utils/storage';
+import { setAuthToken, setUsername, setPhoneNumber } from '@/utils/storage'; 
 
 const SignIn = () => {
   const [step, setStep] = useState(1);
@@ -43,9 +43,11 @@ const SignIn = () => {
         password: password,
       },
       {
-        onSuccess: (res) => {
+        onSuccess: (res) => {          
           if (res.token) {
             setAuthToken(res.token);
+            setUsername(name);
+            setPhoneNumber(phoneNumber); 
             Alert.alert('Success', 'Registration successful!');
             router.push('/(home)');
           } else {

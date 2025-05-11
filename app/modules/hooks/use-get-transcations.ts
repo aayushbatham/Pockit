@@ -33,23 +33,7 @@ export function useGetTransactions() {
   return useQuery({
     queryKey: ['transactions'],
     queryFn: fetchTransactions,
-    staleTime: 1000 * 60 * 5, // Consider data stale after 5 minutes
+    staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: true,
   });
 }
-
-// Usage example:
-/*
-const { data: transactions, isLoading, error } = useGetTransactions();
-
-if (isLoading) return <LoadingSpinner />;
-if (error) return <ErrorMessage error={error} />;
-
-return (
-  <View>
-    {transactions.map(transaction => (
-      <TransactionItem key={transaction.id} transaction={transaction} />
-    ))}
-  </View>
-);
-*/

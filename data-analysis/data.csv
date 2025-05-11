@@ -1,0 +1,575 @@
+Date,Description,Amount,Type,Category
+2025-02-01,EazyApp Tech Pvt,14350.0,Credited,Rent
+2025-02-01,SNAPMINT FINANC,623.0,Credited,Electronics
+2025-02-01,slice,68.77,Credited,Financial Services
+2025-02-01,DURGA SNACKS,40.0,Credited,Food
+2025-02-01,INSTANT RETAIL,60.0,Credited,Shopping
+2025-02-01,VRAHUL,30.0,Credited,Transfer
+2025-02-01,V RAHUL,20.0,Credited,Transfer
+2025-02-01,TRAPTI WO SANTOSH,20000.0,Credited,Rent
+2025-02-01,SHOBHA SANJAY,30.0,Credited,Miscellaneous
+2025-02-01,AMAZON SELLER,1348.0,Credited,Shopping
+2025-02-01,Zepto Marketplace,193.14,Credited,Groceries
+2025-02-02,KARBHARI PAN SH,10.0,Credited,Food
+2025-02-03,Metro,20.0,Credited,Transport
+2025-02-04,DURGA WADA PAV,30.0,Credited,Food
+2025-02-05,SWIGGY,184.0,Credited,Food Delivery
+2025-02-06,CRUNCHYROLL IND,1.0,Credited,Entertainment
+2025-02-01,EazyApp Tech Pvt,14350.0,Debited,Rent
+2025-02-01,SNAPMINT FINANC,623.0,Debited,Electronics
+2025-02-01,slice,68.77,Debited,Financial Services
+2025-02-01,DURGA SNACKS,40.0,Debited,Food
+2025-02-01,INSTANT RETAIL,60.0,Debited,Shopping
+2025-02-01,VRAHUL,30.0,Credited,Transfer
+2025-02-01,V RAHUL,20.0,Debited,Transfer
+2025-02-01,TRAPTI WO SANTOSH,20000.0,Debited,Rent
+2025-02-01,SHOBHA SANJAY,30.0,Debited,Miscellaneous
+2025-02-01,AMAZON SELLER,1348.0,Debited,Shopping
+2025-02-01,Zepto Marketplace,193.14,Debited,Groceries
+2025-02-02,KARBHARI PAN SH,10.0,Debited,Food
+2025-02-03,Metro,20.0,Debited,Transport
+2025-02-04,DURGA WADA PAV,30.0,Debited,Food
+2025-02-05,SWIGGY,184.0,Debited,Food Delivery
+2025-02-06,CRUNCHYROLL IND,1.0,Debited,Entertainment
+2025-02-01,EazyApp Tech Pvt,14350.0,Debited,Rent
+2025-02-01,SNAPMINT FINANC,623.0,Debited,Electronics
+2025-02-01,slice,68.77,Debited,Financial Services
+2025-02-01,DURGA SNACKS,40.0,Debited,Food
+2025-02-01,INSTANT RETAIL,60.0,Debited,Shopping
+2025-02-01,VRAHUL,30.0,Credited,Transfer
+2025-02-01,V RAHUL,20.0,Debited,Transfer
+2025-02-01,TRAPTI WO SANTOSH,20000.0,Debited,Rent
+2025-02-01,SHOBHA SANJAY,30.0,Debited,Miscellaneous
+2025-02-01,AMAZON SELLER,1348.0,Debited,Shopping
+2025-02-01,Zepto Marketplace,193.14,Debited,Groceries
+2025-02-02,KARBHARI PAN SH,10.0,Debited,Food
+2025-02-03,Metro,20.0,Debited,Transport
+2025-02-04,DURGA WADA PAV,30.0,Debited,Food
+2025-02-05,SWIGGY,184.0,Debited,Food Delivery
+2025-02-06,CRUNCHYROLL IND,1.0,Debited,Entertainment
+2025-02-02,SHOBHA SANJAY,30.0,Debited,Miscellaneous
+2025-02-02,SHOBHA SANJAY,20.0,Debited,Miscellaneous
+2025-02-02,KARBHARI PAN SH,20.0,Debited,Food
+2025-02-02,POOJA RAJESH,40.0,Debited,Food
+2025-02-02,MAHESH KISAN KA,40.0,Debited,Food
+2025-02-02,KARBHARI PAN SH,10.0,Debited,Food
+2025-02-02,MAHESH KISAN KA,10.0,Debited,Food
+2025-02-03,SANTOSH PUTHRAN,50.0,Debited,Transfer
+2025-02-03,Metro,20.0,Debited,Transport
+2025-02-03,MAHI PATEL,50.0,Debited,Transfer
+2025-02-03,MAHI PATEL,40.0,Debited,Transfer
+2025-02-03,INSTANT RETAIL,10.0,Debited,Shopping
+2025-02-03,POOJA RAJESH,16.0,Debited,Food
+2025-02-04,SANTOSH PUTHRAN,50.0,Debited,Transfer
+2025-02-04,SANTOSH PUTHRAN,40.0,Debited,Transfer
+2025-02-04,INSTANT RETAIL,30.0,Debited,Shopping
+2025-02-04,INSTANT RETAIL,20.0,Debited,Shopping
+2025-02-04,GAURAV DNYANESH,15.0,Debited,Transfer
+2025-02-04,DURGA WADA PAV,30.0,Debited,Food
+2025-02-04,DURGA WADA PAV,15.0,Debited,Food
+2025-02-05,Metro,15.0,Debited,Transport
+2025-02-05,INSTANT RETAIL,40.0,Debited,Shopping
+2025-02-05,DURGA WADA PAV,15.0,Debited,Food
+2025-02-05,CHAHA ANI BAREC,12.0,Debited,Food
+2025-02-05,SWIGGY,184.0,Debited,Food Delivery
+2025-02-06,INSTANT RETAIL,20.0,Debited,Shopping
+2025-02-06,INSTANT RETAIL,20.0,Debited,Shopping
+2025-02-06,INSTANT RETAIL,20.0,Debited,Shopping
+2025-02-06,ARYAN KAPOOR,110.0,Debited,Transfer
+2025-02-06,VIJAY BABAN KED,20.0,Debited,Transfer
+2025-02-06,ARYANKAPOOR,10.0,Credited,Transfer
+2025-02-06,SHREE CHINESE S,30.0,Debited,Food
+2025-02-07,SANTOSH PUTHRAN,50.0,Debited,Transfer
+2025-02-07,INSTANT RETAIL,20.0,Debited,Shopping
+2025-02-07,MAHI PATEL,50.0,Debited,Transfer
+2025-02-07,INSTANT RETAIL,20.0,Debited,Shopping
+2025-02-07,INSTANT RETAIL,20.0,Debited,Shopping
+2025-02-07,DURGA WADA PAV,30.0,Debited,Food
+2025-02-07,DURGA WADA PAV,15.0,Debited,Food
+2025-02-07,CHAHA ANI BAREC,10.0,Debited,Food
+2025-02-08,SANJAY BABURAO,48.0,Debited,Transfer
+2025-02-08,ABC FARMS PVT L,60.0,Debited,Groceries
+2025-02-08,Soumil Agnihotri,162.0,Credited,Transfer
+2025-02-08,RAHUL KUKREJA,170.0,Debited,Transfer
+2025-02-08,VRAHUL,115.0,Credited,Transfer
+2025-02-08,SHOBH NATH YADA,48.0,Debited,Miscellaneous
+2025-02-08,ARYAN KAPOOR,96.0,Debited,Transfer
+2025-02-08,DURGA WADA PAV,15.0,Debited,Food
+2025-02-08,FAJU SHAIKH,40.0,Debited,Miscellaneous
+2025-02-08,PRAKASH PRABHAKAR,15.0,Debited,Miscellaneous
+2025-02-09,Aayush Batham,60.0,Credited,Transfer
+2025-02-09,SHOBHA SANJAY,50.0,Debited,Miscellaneous
+2025-02-09,VRAHUL,20.0,Credited,Transfer
+2025-02-09,SHOBHA SANJAY,10.0,Debited,Miscellaneous
+2025-02-09,KARBHARI PAN SH,30.0,Debited,Food
+2025-02-09,DURGA WADA PAV,180.0,Debited,Food
+2025-02-09,VRAHUL,60.0,Credited,Transfer
+2025-02-09,DURGA WADA PAV,20.0,Debited,Food
+2025-02-09,ARYANKAPOOR,70.0,Credited,Transfer
+2025-02-09,SHIVAJI BHANUDA,55.0,Debited,Transfer
+2025-02-09,RAHUL KUKREJA,85.0,Debited,Transfer
+2025-02-09,ABC FARMS PVT L,30.0,Debited,Groceries
+2025-02-09,Swiggy,125.0,Debited,Food Delivery
+2025-02-09,Faisal Sageer A,35.0,Debited,Transfer
+2025-02-09,YASHWANT,30.0,Debited,Transfer
+2025-02-09,YASHWANT,10.0,Debited,Transfer
+2025-02-10,SANTOSH PUTHRAN,50.0,Debited,Transfer
+2025-02-10,INSTANT RETAIL,20.0,Debited,Shopping
+2025-02-10,Swiggy Limited,123.0,Debited,Food Delivery
+2025-02-10,Swiggy Limited,123.0,Credited,Refund
+2025-02-10,Swiggy,122.0,Debited,Food Delivery
+2025-02-11,INSTANT RETAIL,20.0,Debited,Shopping
+2025-02-11,Metro,30.0,Debited,Transport
+2025-02-11,TRAPTI WO SANTOSH,5500.0,Credited,Transfer
+2025-02-11,SANTOSH PUTHRAN,50.0,Debited,Transfer
+2025-02-11,FALMUDDIN ANSAR,30.0,Debited,Transfer
+2025-02-11,MINISO,130.0,Debited,Shopping
+2025-02-11,Amazon Pay Balance,50.0,Debited,Wallet
+2025-02-11,Amazon Pay Balance,50.0,Debited,Wallet
+2025-02-11,Amazon Pay Balance,10.0,Debited,Wallet
+2025-02-13,REDBUS,1050.00,Debited,Travel
+2025-02-13,SANTOSH PUTHRA,50.00,Debited,Transfer
+2025-02-13,SHOBHA SANJAY,20.00,Debited,Miscellaneous
+2025-02-13,KARBHARI PAN SH,20.00,Debited,Food
+2025-02-13,GULAM MOHIDDIN,20.00,Debited,Transfer
+2025-02-13,GULAM MOHIDDIN,20.00,Debited,Transfer
+2025-02-13,HOTEL SAI SAMAD,55.00,Debited,Food
+2025-02-13,PhonePe Refund,1202.40,Credited,Refund
+2025-02-14,PANKAJ HAROD,20.00,Debited,Transfer
+2025-02-14,La Pinoz Pizza,114.45,Debited,Food Delivery
+2025-02-14,SARCO ENTERPRISES,20.00,Debited,Miscellaneous
+2025-02-14,Adhoc Maruti Fuel,200.00,Debited,Transport
+2025-02-14,The Groundbaking Co,548.00,Debited,Food
+2025-02-14,MINISO,370.00,Debited,Shopping
+2025-02-14,MANISH KUMAR,10.00,Debited,Transfer
+2025-02-14,JAYNARAYAN GOYAL,60.00,Debited,Transfer
+2025-02-14,PUSHPA PRAJAPAT,80.00,Debited,Transfer
+2025-02-15,SHAKUNTLA RATHORE,20.00,Debited,Transfer
+2025-02-16,HEMANT MANGILAL,100.00,Debited,Transfer
+2025-02-16,YOUTUBE,2.00,Debited,Entertainment
+2025-02-16,TOP N TOWN,60.00,Debited,Food
+2025-02-16,RIDHIKIRANA STORE,20.00,Debited,Shopping
+2025-02-16,JOHNY HOT DOG,60.00,Debited,Food
+2025-02-16,PIYUSH RAWAT,120.00,Debited,Transfer
+2025-02-16,SHREE SAWARIYA,50.00,Debited,Food
+2025-02-16,VIRENDRA KUMAR,10.00,Debited,Transfer
+2025-02-16,Zudio Innoviti,2206.00,Debited,Shopping
+2025-02-16,MAHESH SOLANKI,36.00,Debited,Transfer
+2025-02-16,Swiggy,434.00,Debited,Food Delivery
+2025-02-17,G R MART,230.00,Debited,Groceries
+2025-02-17,SOLANKI CAFE,20.00,Debited,Food
+2025-02-17,Miniso Indore,200.00,Debited,Shopping
+2025-02-17,McDonalds,326.00,Debited,Food
+2025-02-17,MAHI PATEL,20.00,Debited,Transfer
+2025-02-17,ZUDIO,3081.00,Debited,Shopping
+2025-02-18,KAVITA MUNDRA,20.00,Debited,Transfer
+2025-02-18,MOHD RIZVAN,30.00,Debited,Transfer
+2025-02-18,Manasvi foods,25.00,Debited,Food
+2025-02-18,Ajay Rajak,75.00,Debited,Transfer
+2025-02-18,Manasvi foods,85.00,Debited,Food
+2025-02-18,VEDANT COSMETIC,275.00,Debited,Shopping
+2025-02-19,MANISH PRAJAPAT,30.00,Debited,Transfer
+2025-02-19,VIKAS DUSANE,10.00,Debited,Transfer
+2025-02-19,Rapido,183.00,Debited,Transport
+2025-02-19,SANTOSH BATHAM,3000.00,Credited,Transfer
+2025-02-19,Ajay Rajak,75.00,Debited,Transfer
+2025-02-19,Manasvi foods,65.00,Debited,Food
+2025-02-19,Manasvi foods,70.00,Debited,Food
+2025-02-19,Manasvi foods,100.00,Debited,Food
+2025-02-19,MAHI PATEL,40.00,Debited,Transfer
+2025-02-20,SHAKUNTLA RATHORE,40.00,Debited,Transfer
+2025-02-20,REDBUS,895.00,Debited,Travel
+2025-02-20,Manasvi foods,70.00,Debited,Food
+2025-02-20,Raghuveer Shing,40.00,Debited,Transfer
+2025-02-20,Shiv Shakti Photo,30.00,Debited,Miscellaneous
+2025-02-20,Shiv Shakti Photo,10.00,Debited,Miscellaneous
+2025-02-21,INSTANT RETAIL,40.00,Debited,Shopping
+2025-02-21,MAHI PATEL,100.00,Debited,Transfer
+2025-02-21,INSTANT RETAIL,30.00,Debited,Shopping
+2025-02-21,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-02-21,DURGA WADA PAV,30.00,Debited,Food
+2025-02-21,JAGANNATH SUNDA,20.00,Debited,Transfer
+2025-02-22,MORYA MISAL,60.00,Debited,Food
+2025-02-22,ARCHANA SANTOSH,50.00,Debited,Transfer
+2025-02-22,Boomer’s Gaming,210.00,Debited,Entertainment
+2025-02-22,Rajesh,40.00,Debited,Transfer
+2025-02-22,FARMAN ASLAM ANSAR,30.00,Debited,Transfer
+2025-02-23,JAGANNATH SUNDA,50.00,Debited,Transfer
+2025-02-23,JAGANNATH SUNDA,15.00,Debited,Transfer
+2025-02-23,CHAHA ANI BAREC,20.00,Debited,Food
+2025-02-23,MINISO,179.00,Debited,Shopping
+2025-02-23,MOJIBUR RAHAMAN,40.00,Debited,Transfer
+2025-02-23,RAGHAV JANGIR,188.00,Debited,Transfer
+2025-02-23,PM STORE,40.00,Debited,Food
+2025-02-23,FALMUDDIN ANSAR,30.00,Debited,Transfer
+2025-02-23,SHREE CHINESE S,125.00,Debited,Food
+2025-02-24,DURGA WADA PAV,30.00,Debited,Food
+2025-02-24,DURGA WADA PAV,10.00,Debited,Food
+2025-02-24,INSTANT RETAIL,10.00,Debited,Shopping
+2025-02-24,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-02-24,DURGA WADA PAV,15.00,Debited,Food
+2025-02-24,SHOBHA SANJAY,20.00,Debited,Miscellaneous
+2025-02-24,SHOBHA SANJAY,20.00,Debited,Miscellaneous
+2025-02-24,KARBHARI PAN SH,20.00,Debited,Food
+2025-02-25,Metro,20.00,Debited,Transport
+2025-02-25,Metro,20.00,Debited,Transport
+2025-02-25,INSTANT RETAIL,20.00,Debited,Shopping
+2025-02-25,YOUTUBE (VISA-REFUND),2.00,Credited,Refund
+2025-02-25,INSTANT RETAIL,20.00,Debited,Shopping
+2025-02-25,DURGA WADA PAV,30.00,Debited,Food
+2025-02-25,DURGA WADA PAV,15.00,Debited,Food
+2025-02-25,JAGANNATH SUNDA,20.00,Debited,Transfer
+2025-02-26,MORYA MISAL,60.00,Debited,Food
+2025-02-26,INSTANT RETAIL,10.00,Debited,Shopping
+2025-02-26,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-02-26,INSTANT RETAIL,20.00,Debited,Shopping
+2025-02-26,Metro,20.00,Debited,Transport
+2025-02-26,INSTANT RETAIL,20.00,Debited,Shopping
+2025-02-26,ARYAN KAPOOR,40.00,Debited,Transfer
+2025-02-26,DURGA WADA PAV,30.00,Debited,Food
+2025-02-26,DURGA SNACKS,20.00,Debited,Food
+2025-02-26,TRAPTI WO SANTOSH,1500.00,Credited,Transfer
+2025-02-27,REDBUS,1365.00,Debited,Travel
+2025-02-27,MORYA MISAL,60.00,Debited,Food
+2025-02-27,SHOBHA SANJAY,20.00,Debited,Miscellaneous
+2025-02-27,Metro,20.00,Debited,Transport
+2025-02-27,HEMANT DAMAMI,12.00,Debited,Transfer
+2025-02-27,OM SAI MEDICAL,40.00,Debited,Medical
+2025-02-27,PAVAN PRAKASH,20.00,Debited,Transfer
+2025-02-27,Bikaner Hotel,188.00,Debited,Food
+2025-02-27,Bikaner Hotel,45.00,Debited,Food
+2025-02-28,Rapido,83.00,Debited,Transport
+2025-02-28,Tirupati Fuel Station,200.00,Debited,Transport
+2025-02-28,MAHI PATEL,106.00,Debited,Transfer
+2025-02-28,ANWAR NAWAB KHAN,30.00,Debited,Transfer
+2025-02-28,BHARAT YADAV,100.00,Debited,Transfer
+2025-02-28,Tirupati Fuel Station,132.00,Debited,Transport
+2025-02-28,SANTOSH BATHAM,300.00,Credited,Transfer
+2025-02-28,Tirupati Fuel Station,50.00,Debited,Transport
+2025-02-28,Tirupati Fuel Station,150.00,Debited,Transport
+2025-02-28,KALABAI WO KAILASH,525.00,Debited,Transfer
+2025-02-28,BAJAJ FINSERV (NEFT),44000.00,Credited,Income
+2025-02-28,Makhan Malviya,40.00,Debited,Transfer
+2025-02-28,CRISP ONLINE SERVICES,118.00,Debited,Subscriptions
+2025-02-28,ASHWIN CARPENTER,50.00,Debited,Transfer
+2025-02-28,ACROPOLIS,24.00,Debited,Education
+2025-02-28,ACROPOLIS,1.00,Debited,Education
+2025-02-28,Manasvi foods,80.00,Debited,Food
+2025-02-28,Manasvi foods,25.00,Debited,Food
+2025-02-28,Manasvi foods,25.00,Debited,Food
+2025-02-28,LOKESH DIXIT,30.00,Debited,Transfer
+2025-02-28,NAMOKAR SANDIVCH,40.00,Debited,Food
+2025-02-28,RIDHIKIRANA STORE,45.00,Debited,Shopping
+2025-03-01,TRAPTI WO SANTOSH,20000.00,Debited,Rent
+2025-03-01,RENTOK,14350.00,Debited,Rent
+2025-03-01,slice,375.12,Debited,Financial Services
+2025-03-01,SNAPMINT FINANCE,705.00,Debited,Electronics
+2025-03-01,TRAPTI WO SANTOSH,2000.00,Credited,Transfer
+2025-03-01,SIDDHARTH PARMAR,5500.00,Debited,Transfer
+2025-03-01,TRAPTI WO SANTOSH,5500.00,Credited,Transfer
+2025-03-02,HEMANT MANGILAL,200.00,Debited,Transfer
+2025-03-02,CRUNCHYROLL IND,1.00,Debited,Entertainment
+2025-03-02,CRUNCHYROLL IND,1.00,Credited,Refund
+2025-03-02,BAKENZA BAKERY,130.00,Debited,Food
+2025-03-02,Swiggy,744.00,Debited,Food Delivery
+2025-03-02,Swiggy Refund,66.00,Credited,Refund
+2025-03-02,PEARLS HOSPITAL,389.00,Debited,Medical
+2025-03-02,VAISHNAVI FUELS,100.00,Debited,Transport
+2025-03-02,APOORV GUPTA,30.00,Debited,Transfer
+2025-03-02,NEHA KASLIWAL,20.00,Debited,Transfer
+2025-03-02,PREMLATA JAIN,50.00,Debited,Transfer
+2025-03-03,KAILASH CHAND K,40.00,Debited,Transfer
+2025-03-03,ACROPOLIS,2.00,Debited,Education
+2025-03-03,ACROPOLIS,5.00,Debited,Education
+2025-03-03,Ajay Rajak,145.00,Debited,Transfer
+2025-03-03,Mr AJAY RAJAK1,120.00,Debited,Transfer
+2025-03-03,REDBUS,1300.00,Debited,Travel
+2025-03-03,Grand Utsav Hotel,105.00,Debited,Food
+2025-03-03,VIJAY GEHLOT,20.00,Debited,Transfer
+2025-03-03,VIJAY GEHLOT,10.00,Debited,Transfer
+2025-03-04,PRATIKSHA PATEL,150.00,Debited,Transfer
+2025-03-04,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-04,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-04,Metro,30.00,Debited,Transport
+2025-03-04,RITVICK VISHAL,10.00,Credited,Transfer
+2025-03-04,Aayush Batham,1600.00,Credited,Transfer
+2025-03-04,Swiggy Ltd,351.00,Debited,Food Delivery
+2025-03-04,Blinkit,1603.00,Debited,Groceries
+2025-03-04,DURGA WADA PAV,15.00,Debited,Food
+2025-03-04,DURGA WADA PAV,30.00,Debited,Food
+2025-03-04,TRAPTI WO SANTOSH,1400.00,Credited,Transfer
+2025-03-05,Akshansh Gupta,20.00,Debited,Transfer
+2025-03-05,MAHI PATEL,100.00,Debited,Transfer
+2025-03-05,INSTANT RETAIL,40.00,Debited,Shopping
+2025-03-05,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-05,AKHILESH KUMAR,30.00,Debited,Transfer
+2025-03-05,JAGANNATH SUNDA,50.00,Debited,Transfer
+2025-03-06,SUSMIT TOURS,20.00,Debited,Travel
+2025-03-06,SUSMIT TOURS,30.00,Debited,Travel
+2025-03-06,POS DECL FEE,29.50,Debited,Charges
+2025-03-06,MAHI PATEL,100.00,Debited,Transfer
+2025-03-06,INSTANT RETAIL,10.00,Debited,Shopping
+2025-03-06,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-06,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-06,MAHI PATEL,100.00,Debited,Transfer
+2025-03-06,Faisal Sageer,35.00,Debited,Transfer
+2025-03-06,SUSMIT TOURS,20.00,Debited,Travel
+2025-03-06,SUMAYYA BEEVI,20.00,Debited,Transfer
+2025-03-06,POS DECL FEE,29.50,Debited,Charges
+2025-03-06,THE EXCELLENT A,300.00,Debited,Education
+2025-03-06,HARDCASTLE RESTAURANT,68.98,Debited,Food
+2025-03-06,KESHAV KUMAR,34.00,Credited,Transfer
+2025-03-06,DURGA WADA PAV,15.00,Debited,Food
+2025-03-07,DURGA WADA PAV,30.00,Debited,Food
+2025-03-07,Faisal Sageer,35.00,Debited,Transfer
+2025-03-08,MORYA MISAL,60.00,Debited,Food
+2025-03-08,SUSMIT TOURS,30.00,Debited,Travel
+2025-03-08,SUSMIT TOURS,20.00,Debited,Travel
+2025-03-08,DINESH SO KAILASH,20.00,Debited,Transfer
+2025-03-08,Sagar,10.00,Debited,Transfer
+2025-03-08,Raghunath Jain,15.00,Debited,Transfer
+2025-03-08,DOMINOS PIZZA,103.95,Debited,Food
+2025-03-08,FRESH JUICE CENTER,40.00,Debited,Food
+2025-03-08,OMKAR TULSHIRAM,110.00,Debited,Transfer
+2025-03-08,DINESH SO KAILASH,20.00,Debited,Transfer
+2025-03-09,MAHI PATEL,200.00,Credited,Transfer
+2025-03-09,RAJESHWARI IDLI,35.00,Debited,Food
+2025-03-09,POOJA RAJESH,30.00,Debited,Transfer
+2025-03-09,CRUNCHYROLL IND,99.00,Debited,Entertainment
+2025-03-09,SWIGGY,278.00,Debited,Food Delivery
+2025-03-09,HARMAN LAKHA,565.00,Debited,Transfer
+2025-03-09,SHREE CHINESE S,110.00,Debited,Food
+2025-03-09,SHAILENDRA MISHRA,20.00,Debited,Transfer
+2025-03-09,LIMBARAJ DATTATRAY,35.00,Debited,Transfer
+2025-03-09,Boomer’s Gaming,200.00,Debited,Entertainment
+2025-03-09,Rajesh,40.00,Debited,Transfer
+2025-03-09,FALMUDDIN ANSAR,30.00,Debited,Transfer
+2025-03-09,DINESH SO KAILASH,20.00,Debited,Transfer
+2025-03-10,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-10,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-10,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-10,DINESHSOKAILASH,20.00,Debited,Transfer
+2025-03-10,OMKAR TULSHIRAM,75.00,Debited,Transfer
+2025-03-10,DINESHSOKAILASH,20.00,Debited,Transfer
+2025-03-10,POOJA RAJESH,20.00,Debited,Transfer
+2025-03-11,SUSMIT TOURS,30.00,Debited,Travel
+2025-03-11,SUSMIT TOURS,30.00,Debited,Travel
+2025-03-11,SUMAYYA BEEVI,25.00,Debited,Transfer
+2025-03-11,SANTOSH PUTHRAN,32.00,Debited,Transfer
+2025-03-11,MALIKA MALHOTRA,35.00,Credited,Transfer
+2025-03-11,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-11,SUSMIT TOURS,30.00,Debited,Travel
+2025-03-11,SUSMIT TOURS,20.00,Debited,Travel
+2025-03-11,DINESHSOKAILASH,20.00,Debited,Transfer
+2025-03-11,TRAPTI WO SANTOSH,2200.00,Credited,Transfer
+2025-03-11,MakeMyTrip,1565.00,Debited,Travel
+2025-03-11,MAHI PATEL,2400.00,Credited,Transfer
+2025-03-11,POOJA RAJESH,20.00,Debited,Transfer
+2025-03-11,POOJA RAJESH,20.00,Debited,Transfer
+2025-03-12,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-12,INSTANT RETAIL,35.00,Debited,Shopping
+2025-03-12,Bikaner Hotel,60.00,Debited,Food
+2025-03-12,RISHABH PALIWAL,160.00,Debited,Transfer
+2025-03-12,RISHABH PATEL,163.00,Credited,Transfer
+2025-03-12,Soumil Agnihotri,167.00,Credited,Transfer
+2025-03-13,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-13,Metro,20.00,Debited,Transport
+2025-03-13,DINESHSOKAILASH,20.00,Debited,Transfer
+2025-03-13,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-13,DURGA WADA PAV,30.00,Debited,Food
+2025-03-13,SHOBHA SANJAY,20.00,Debited,Miscellaneous
+2025-03-13,Santosh Batham,200.00,Credited,Transfer
+2025-03-13,RAHUL KUKREJA,106.00,Debited,Transfer
+2025-03-13,Ramesh Yadav,50.00,Debited,Transfer
+2025-03-13,Faisal Sageer,35.00,Debited,Transfer
+2025-03-13,LOKESH DIXIT,30.00,Debited,Transfer
+2025-03-14,MORYA MISAL,60.00,Debited,Food
+2025-03-14,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-14,TRAPTI WO SANTOSH,1000.00,Credited,Transfer
+2025-03-14,INSTANT RETAIL,30.00,Debited,Shopping
+2025-03-14,Metro,20.00,Debited,Transport
+2025-03-14,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-14,Bikaner Hotel,60.00,Debited,Food
+2025-03-14,Bikaner Hotel,45.00,Debited,Food
+2025-03-14,Rapido,60.00,Debited,Transport
+2025-03-14,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-14,Metro,20.00,Debited,Transport
+2025-03-14,DURGA WADA PAV,30.00,Debited,Food
+2025-03-14,DURGA WADA PAV,15.00,Debited,Food
+2025-03-15,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-15,INSTANT RETAIL,30.00,Debited,Shopping
+2025-03-15,FARMAN ANSAR,25.00,Debited,Transfer
+2025-03-15,Blinkit,354.00,Debited,Groceries
+2025-03-15,TRAPTI WO SANTOSH,500.00,Credited,Transfer
+2025-03-15,OMKAR TULSHIRAM,100.00,Debited,Transfer
+2025-03-15,Ashok Maruti,35.00,Debited,Transfer
+2025-03-15,FAHMEEDA BEGAM,42.00,Debited,Transfer
+2025-03-15,RADHA KAPSE,35.00,Debited,Transfer
+2025-03-15,OMKAR TULSHIRAM,125.00,Debited,Transfer
+2025-03-16,SUSMIT TOURS,20.00,Debited,Travel
+2025-03-16,SUSMIT TOURS,20.00,Debited,Travel
+2025-03-16,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-16,PH MAH PUN Market,146.00,Debited,Groceries
+2025-03-17,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-17,MAHI PATEL,50.00,Debited,Transfer
+2025-03-17,DURGA WADA PAV,15.00,Debited,Food
+2025-03-17,DURGA WADA PAV,15.00,Debited,Food
+2025-03-18,SUSMIT TOURS,30.00,Debited,Travel
+2025-03-18,SUSMIT TOURS,30.00,Debited,Travel
+2025-03-18,DINESHSOKAILASH,20.00,Debited,Transfer
+2025-03-18,DATTA TRIYAMBAK,240.00,Debited,Transfer
+2025-03-18,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-18,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-18,SANTOSH PUTHRAN,20.00,Debited,Transfer
+2025-03-18,MAHI PATEL,200.00,Debited,Transfer
+2025-03-18,Metro,35.00,Debited,Transport
+2025-03-18,RISHABH PATEL,194.00,Debited,Transfer
+2025-03-19,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-19,INSTANT RETAIL,35.00,Debited,Shopping
+2025-03-19,Faisal Sageer,35.00,Debited,Transfer
+2025-03-19,SUSMIT TOURS,20.00,Debited,Travel
+2025-03-19,DINESHSOKAILASH,20.00,Debited,Transfer
+2025-03-19,OMKAR TULSHIRAM,125.00,Debited,Transfer
+2025-03-20,INSTANT RETAIL,20.00,Debited,Shopping
+2025-03-20,DINESHSOKAILASH,20.00,Debited,Transfer
+2025-03-20,SUMAYYA BEEVI,65.00,Debited,Transfer
+2025-03-20,HANUMANT KHANDE,10.00,Debited,Transfer
+2025-03-20,DURGA WADA PAV,30.00,Debited,Food
+2025-03-21,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-21,SANTOSH PUTHRAN,60.00,Debited,Transfer
+2025-03-21,INSTANT RETAIL,50.00,Debited,Shopping
+2025-03-21,Metro,30.00,Debited,Transport
+2025-03-21,Swiggy,214.00,Debited,Food Delivery
+2025-03-21,SUSMIT TOURS,60.00,Debited,Travel
+2025-03-21,SUMAYYA BEEVI,20.00,Debited,Transfer
+2025-03-21,TRAPTI WO SANTOSH,500.00,Credited,Transfer
+2025-03-22,YASHWANT,40.00,Debited,Transfer
+2025-03-22,SUSMIT TOURS,30.00,Debited,Travel
+2025-03-22,SUSMIT TOURS,20.00,Debited,Travel
+2025-03-22,SUMAYYA BEEVI,20.00,Debited,Transfer
+2025-03-22,UNKNOWN PAYER,50.00,Debited,Miscellaneous
+2025-03-22,DINESHSOKAILASH,40.00,Debited,Transfer
+2025-03-22,ARYAN KAPOOR,20.00,Credited,Transfer
+2025-03-22,Imran,35.00,Debited,Transfer
+2025-03-22,Boomer’s Gaming,650.00,Debited,Entertainment
+2025-03-22,FARMAN ASLAM,30.00,Debited,Transfer
+2025-03-23,Blinkit,354.00,Debited,Groceries
+2025-03-23,TRAPTI WO SANTOSH,500.00,Credited,Transfer
+2025-03-23,OMKAR TULSHIRAM,100.00,Debited,Transfer
+2025-03-23,Ashok Maruti,35.00,Debited,Transfer
+2025-03-23,FAHMEEDA BEGAM,42.00,Debited,Transfer
+2025-03-23,RADHA KAPSE,35.00,Debited,Transfer
+2025-03-23,OMKAR TULSHIRAM,125.00,Debited,Transfer
+2025-03-24,SUSMIT TOURS,30.00,Debited,Travel
+2025-03-24,SUSMIT TOURS,30.00,Debited,Travel
+2025-03-24,DINESHSOKAILASH,40.00,Debited,Transfer
+2025-03-24,RAHUL KUKREJA,120.00,Debited,Transfer
+2025-03-24,MAHI PATEL,80.00,Debited,Transfer
+2025-03-24,OMKAR TULSHIRAM,75.00,Debited,Transfer
+2025-03-24,DINESHSOKAILASH,20.00,Debited,Transfer
+2025-03-24,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-03-25,DURGA WADA PAV,20.00,Debited,Food
+2025-03-25,SAKIR,45.00,Debited,Transfer
+2025-03-25,MOHAMMAD ISLAM,35.00,Debited,Transfer
+2025-03-25,Aayush Batham,500.00,Credited,Transfer
+2025-03-25,RETAIL CC CHARGES,480.00,Debited,Charges
+2025-03-26,Metro,20.00,Debited,Transport
+2025-03-26,SANTOSH BATHAM,1000.00,Credited,Transfer
+2025-03-26,TRAPTI WO SANTOSH,600.00,Credited,Transfer
+2025-03-26,REDBUS,1228.50,Debited,Travel
+2025-03-26,PIYUSH RAWAT,300.00,Debited,Transfer
+2025-03-26,DINESAN KELOTH,120.00,Debited,Transfer
+2025-03-26,DINESAN KELOTH,60.00,Debited,Transfer
+2025-03-26,DINESAN KELOTH,20.00,Debited,Transfer
+2025-03-27,SANTOSH BATHAM,300.00,Credited,Transfer
+2025-03-27,SHUBHAM NAYAK,201.00,Debited,Transfer
+2025-03-27,Aayush Batham,400.00,Credited,Transfer
+2025-03-27,SHAILENDRA SINGH,402.00,Debited,Transfer
+2025-03-27,Mr AJAY RAJAK,80.00,Debited,Transfer
+2025-03-27,Manasvi Foods,100.00,Debited,Food
+2025-03-28,SHAILENDRA SING,21.00,Debited,Transfer
+2025-03-28,Manasvi foods,25.00,Debited,Food
+2025-03-28,Manasvi foods,65.00,Debited,Food
+2025-03-28,TRAPTI WO SANTO,250.00,Credited,Transfer
+2025-03-28,MAHI PATEL,250.00,Debited,Transfer
+2025-03-28,MAHI PATEL,250.00,Credited,Transfer
+2025-03-29,AKASH LIMBODIYA,30.00,Debited,Transfer
+2025-03-29,Shaheed Chandra,200.00,Debited,Transfer
+2025-03-29,Manasvi foods,30.00,Debited,Food
+2025-03-29,Manasvi foods,35.00,Debited,Food
+2025-03-29,Manasvi foods,10.00,Debited,Food
+2025-03-29,Manasvi foods,50.00,Debited,Food
+2025-03-29,TRAPTI WO SANTO,30.00,Credited,Transfer
+2025-03-29,Lalach Foods,20.00,Debited,Food
+2025-03-29,ISHWAR LAL SEN,10.00,Debited,Transfer
+2025-03-29,MAHI PATEL,10.00,Credited,Transfer
+2025-03-29,ANUSHKA HETAWAL,50.00,Credited,Transfer
+2025-03-30,TRAPTI WO SANTO,2000.00,Credited,Transfer
+2025-03-30,REDBUS,1455.30,Debited,Travel
+2025-03-30,Chalu Chinese E,196.00,Debited,Food
+2025-03-30,Chalu Chinese E,20.00,Debited,Food
+2025-03-31,TRAPTI WO SANTO,250.00,Credited,Transfer
+2025-03-31,Pitambar Narhar,239.00,Debited,Transfer
+2025-03-31,MALIKA MALHOTRA,150.00,Credited,Transfer
+2025-03-31,INSTANT RETAIL,35.00,Debited,Shopping
+2025-03-31,BAJAJ FINSERV HEALTH,44000.00,Credited,Transfer
+2025-03-31,SNAPMINT CREDIT,705.00,Debited,EMI
+2025-03-31,slice,587.65,Debited,EMI
+2025-04-01,TRAPTI WO SANTO,2000.00,Credited,Transfer
+2025-04-01,TRAPTI WO SANTO,200.00,Credited,Transfer
+2025-04-01,Dinesh S/O Kailash,50.00,Debited,Transfer
+2025-04-01,Blinkit,354.00,Debited,Groceries
+2025-04-02,MAHI PATEL,20.00,Credited,Transfer
+2025-04-02,Durga Wada Pav,15.00,Debited,Food
+2025-04-02,Durga Wada Pav,30.00,Debited,Food
+2025-04-02,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-04-03,MAHI PATEL,500.00,Debited,Transfer
+2025-04-03,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-04-03,Amazon Pay,50.00,Debited,Wallet
+2025-04-04,TRAPTI WO SANTO,1500.00,Credited,Transfer
+2025-04-04,TRAPTI WO SANTO,1000.00,Credited,Transfer
+2025-04-05,INSTANT RETAIL,40.00,Debited,Shopping
+2025-04-05,MAHI PATEL,50.00,Credited,Transfer
+2025-04-06,TRAPTI WO SANTO,1000.00,Credited,Transfer
+2025-04-07,RIDHIKIRANA STORE,90.00,Debited,Shopping
+2025-04-08,MAHI PATEL,90.00,Debited,Transfer
+2025-04-09,MAHI PATEL,90.00,Debited,Transfer
+2025-04-10,Manasvi foods,65.00,Debited,Food
+2025-04-10,Manasvi foods,20.00,Debited,Food
+2025-04-11,MANISH PRAJAPAT,15.00,Debited,Transfer
+2025-04-11,Dipali Kirana,20.00,Debited,Groceries
+2025-04-11,MITU GUJAR,10.00,Debited,Transfer
+2025-04-11,Manasvi foods,90.00,Debited,Food
+2025-04-11,Mr AJAY RAJAK,25.00,Debited,Transfer
+2025-04-12,MAMTA PALIWAL,30.00,Debited,Transfer
+2025-04-12,JITENDRA MURARI,40.00,Debited,Transfer
+2025-04-12,ASHWIN CARPENTER,20.00,Debited,Transfer
+2025-04-12,ASHWIN CARPENTER,40.00,Debited,Transfer
+2025-04-13,MITU GUJAR,10.00,Debited,Transfer
+2025-04-13,ASHWIN CARPENTER,25.00,Debited,Transfer
+2025-04-14,Manasvi foods,75.00,Debited,Food
+2025-04-14,SANTOSH PUTHRAN,50.00,Debited,Transfer
+2025-04-25,JAGDISH PANWAR,55.00,Debited,Transfer
+2025-04-25,RIDHIKIRANA STORE,104.00,Debited,Shopping
+2025-04-26,MAMTA PALIWAL,10.00,Debited,Transfer
+2025-04-26,JITENDRA RAM,30.00,Debited,Transfer
+2025-04-26,DEEPESH PUROHIT,90.00,Debited,Transfer
+2025-04-26,TRAPTI WO SANTO,200.00,Credited,Transfer
+2025-04-26,AYUSH PRAJAPAT,11.00,Debited,Transfer
+2025-04-27,TRAPTI WO SANTO,1539.00,Credited,Transfer
+2025-04-27,Unstop,1535.40,Debited,Subscriptions
+2025-04-27,REENA,375.00,Credited,Transfer
+2025-04-27,SHRI CHARBHUJA,25.00,Debited,Food
+2025-04-27,GREEN SUPERMART,20.00,Debited,Groceries
+2025-04-27,DEVENDRA NAIWAL,40.00,Debited,Transfer
+2025-04-27,SOMU SINGH,35.00,Debited,Transfer
+2025-04-27,SORIN NEEMA,165.00,Debited,Transfer
+2025-04-28,AAYUSH BATHAM,400.00,Credited,Transfer
+2025-04-28,Swiggy Ltd,661.00,Debited,Food Delivery
+2025-04-28,NAMOKAR SANDIVC,10.00,Debited,Food
+2025-04-29,COCO BP Park,100.00,Debited,Fuel
+2025-04-30,BAJAJ FINSERV HEALTH,44000.00,Credited,Salary
+2025-04-30,MAHI PATEL,2700.00,Credited,Transfer
+2025-04-30,SKY RESEARCH PU,2202.73,Debited,Services
+2025-04-30,SOMU SINGH,300.00,Credited,Transfer
+2025-04-30,TRAPTI WO SANTO,13000.00,Debited,Transfer
