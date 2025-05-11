@@ -92,7 +92,8 @@ Pockit uses **cutting-edge Machine Learning** to:
 
 - Python, TensorFlow / PyTorch  
 - HuggingFace Transformers, Prophet, LSTM  
-- OpenAI API  
+- OpenAI API
+- Spring Boot
 - React Native (UI)  
 
 ---
