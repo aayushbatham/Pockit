@@ -47,7 +47,7 @@ export default function ChatbotPage() {
   }, [language]);
 
   const ai = new Anthropic({
-    apiKey: "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",
+    apiKey: "",
   });
   
   const { mutate: addTransaction } = useAddTransaction();
