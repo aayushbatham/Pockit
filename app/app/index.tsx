@@ -17,6 +17,6 @@ export default function Index() {
   if (!fontsLoaded) return null;
 
   return (
-    <Redirect href={isAuthenticated ? "/(dashboard)" : "/(unauthorized)"} />
+    <Redirect href={isAuthenticated ? "/(home)" : "/(unauthorized)"} />
   );
 }

@@ -16,6 +16,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAddTransaction } from "@/modules/hooks/use-add-transaction";
+import { useAddMilestone } from '@/modules/hooks/use-add-milestone';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface Message {
@@ -50,6 +51,7 @@ export default function ChatbotPage() {
   });
   
   const { mutate: addTransaction } = useAddTransaction();
+  const { mutate: addMilestone } = useAddMilestone();
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -60,13 +62,11 @@ export default function ChatbotPage() {
     setIsLoading(true);
 
     try {
-      // Define the type for a text content block
       type TextContentBlock = {
         type: "text";
         text: string;
       };
 
-      // Type guard to check if a content block is of type 'text'
       function isTextBlock(block: any): block is TextContentBlock {
         return block.type === "text" && typeof block.text === "string";
       }
@@ -81,7 +81,18 @@ export default function ChatbotPage() {
           },
         ],
         system: `You are a smart financial assistant. You should respond in ${language === 'en' ? 'English' : language === 'gu' ? 'Gujarati' : language === 'mr' ? 'Marathi' : 'Hindi'} language only.
-Extract spending information from this message and respond ONLY with a JSON object in this exact format (no other text). Some fields can be optional. Extract data that you can; if you cannot find that field, return null:
+
+If the user message contains information about saving money or financial goals, respond with a JSON object in this format:
+{
+  "json": {
+    "savedAmount": "<current saved amount or '0'>",
+    "goalAmount": "<target amount to save>",
+    "duration": "<time period for saving>"
+  },
+  "message": "<write an encouraging message about their savings goal in ${language === 'en' ? 'English' : language === 'gu' ? 'Gujarati' : language === 'mr' ? 'Marathi' : 'Hindi'} language>"
+}
+
+Otherwise, for spending information, respond with this format:
 {
   "json": {
     "phoneNumber": "+1234567890",
@@ -99,7 +110,7 @@ Extract spending information from this message and respond ONLY with a JSON obje
         .map((block: any) => block.text)
         .join("");
       let message = JSON.parse(assistantMessage);
-
+      
       if (message.message === undefined || "") {
         message.message = language === 'en' 
           ? "I'm sorry, I couldn't understand your request."
@@ -111,14 +122,23 @@ Extract spending information from this message and respond ONLY with a JSON obje
       }
 
       if (message.json) {
-        const transactionPayload = {
-          phoneNumber: message.json.phoneNumber || "null",
-          amount: message.json.amount || 0,
-          spentCategory: message.json.spentCategory || "null",
-          methodeOfPayment: message.json.methodeOfPayment || "null",
-          receiver: message.json.receiver || "null",
-        };
-        addTransaction(transactionPayload);
+        if (message.json.savedAmount !== undefined) {
+          const milestonePayload = {
+            savedAmount: Number(message.json.savedAmount),
+            goalAmount: Number(message.json.goalAmount),
+            duration: message.json.duration
+          };
+          addMilestone(milestonePayload);
+        } else {
+          const transactionPayload = {
+            phoneNumber: message.json.phoneNumber || "null",
+            amount: message.json.amount || 0,
+            spentCategory: message.json.spentCategory || "null",
+            methodeOfPayment: message.json.methodeOfPayment || "null",
+            receiver: message.json.receiver || "null",
+          };
+          addTransaction(transactionPayload);
+        }
       }
 
       setMessages((prev) => [

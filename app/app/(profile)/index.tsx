@@ -1,153 +1,115 @@
-import React, { useState } from "react";
-import { ScrollView, View, StyleSheet, Pressable, Switch } from "react-native";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { DarkTheme, DefaultTheme } from "@react-navigation/native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { LanguageSelector } from "@/components/LanguageSelector";
-
-interface ProfileData {
-  name: string;
-  personalityType: string;
-  personalityDescription: string;
-  goal: {
-    item: string;
-    saved: number;
-    total: number;
-  };
-  rewards: string;
-  smsAccess: boolean;
-  upiSync: boolean;
-  insights: string[];
-}
-
-const mockProfileData: ProfileData = {
-  name: "Rohan",
-  personalityType: "Conscious Spender",
-  personalityDescription: "You love sharing experiences and food. Let's keep it mindful.",
-  goal: {
-    item: "iPad",
-    saved: 30000,
-    total: 50000,
-  },
-  rewards: "Flipkart ₹200 voucher",
-  smsAccess: true,
-  upiSync: true,
-  insights: [
-    "Started SIP on April 5th",
-    "Saved 40% on food in March",
-  ],
-};
+import React from 'react';
+import { View, StyleSheet, Pressable, Alert, ScrollView } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { router } from 'expo-router';
+import { ThemedView } from '@/components/ThemedView';
+import { ThemedText } from '@/components/ThemedText';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { removeAuthToken, getUsername, getPhoneNumber } from '@/utils/storage';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function ProfilePage() {
-  const [profileData, setProfileData] = useState<ProfileData>(mockProfileData);
+  const { t, language, setLanguage } = useLanguage();
   const colorScheme = useColorScheme();
-  const theme = colorScheme === "dark" ? DarkTheme : DefaultTheme;
-  const { t } = useLanguage();
+  const primaryColor = '#8B5CF6';
+  const cardBgColor = colorScheme === 'dark' ? '#1E1E1E' : '#F3F4F6';
+  const username = getUsername();
+  const phoneNumber = getPhoneNumber();
 
-  const backgroundColor = theme.colors.background;
-  const textColor = theme.colors.text;
-  const primaryColor = "#8B5CF6"; // Purple theme color
-  const cardBgColor = colorScheme === "dark" ? "#1E1E1E" : "#F3F4F6";
+  const handleLogout = () => {
+    Alert.alert(
+      t('logoutTitle'),
+      t('logoutMessage'),
+      [
+        { text: t('cancel'), style: 'cancel' },
+        {
+          text: t('logout'),
+          style: 'destructive',
+          onPress: () => {
+            removeAuthToken();
+            router.replace('/(auth)/login');
+          },
+        },
+      ]
+    );
+  };
+
+  const SettingItem = ({ icon, title, onPress, showBorder = true }) => (
+    <Pressable
+      style={[styles.settingItem, showBorder && styles.settingBorder]}
+      onPress={onPress}
+    >
+      <View style={[styles.settingIcon, { backgroundColor: `${primaryColor}15` }]}>
+        <MaterialCommunityIcons name={icon} size={22} color={primaryColor} />
+      </View>
+      <ThemedText style={styles.settingText}>{title}</ThemedText>
+      <MaterialCommunityIcons 
+        name="chevron-right" 
+        size={22} 
+        color={colorScheme === 'dark' ? '#666' : '#999'} 
+      />
+    </Pressable>
+  );
+
+  const LanguageOption = ({ code, title }) => (
+    <Pressable
+      style={[
+        styles.languageOption,
+        language === code && { backgroundColor: `${primaryColor}15` }
+      ]}
+      onPress={() => setLanguage(code)}
+    >
+      <ThemedText style={[
+        styles.languageText,
+        language === code && { color: primaryColor }
+      ]}>
+        {title}
+      </ThemedText>
+      {language === code && (
+        <MaterialCommunityIcons name="check-circle" size={20} color={primaryColor} />
+      )}
+    </Pressable>
+  );
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor }]}>
-      {/* Top Section */}
-      <ThemedView style={styles.header}>
-        <View style={styles.avatarSection}>
-          <View style={[styles.avatar, { backgroundColor: primaryColor + "20" }]}>
-            <MaterialCommunityIcons name="account" size={40} color={primaryColor} />
+    <ThemedView style={styles.container}>
+      <LinearGradient
+        colors={[primaryColor, `${primaryColor}80`]}
+        style={styles.header}
+      >
+        <View style={styles.profileInfo}>
+          <View style={styles.avatar}>
+            <ThemedText style={styles.avatarText}>
+              {username?.charAt(0).toUpperCase()}
+            </ThemedText>
           </View>
-          <View style={styles.nameSection}>
-            <ThemedText style={styles.name}>{profileData.name}</ThemedText>
-            <ThemedText style={styles.personality}>{profileData.personalityType}</ThemedText>
+          <View style={styles.userInfo}>
+            <ThemedText style={styles.username}>{username}</ThemedText>
+            <ThemedText style={styles.phoneNumber}>{phoneNumber}</ThemedText>
+          </View>
+        </View>
+      </LinearGradient>
+
+      <ScrollView style={styles.content}>
+        <View style={[styles.card, { backgroundColor: cardBgColor }]}>
+          <ThemedText style={styles.sectionTitle}>{t('language')}</ThemedText>
+          <View style={styles.languageGrid}>
+            <LanguageOption code="en" title="English" />
+            <LanguageOption code="hi" title="हिंदी" />
+            <LanguageOption code="gu" title="ગુજરાતી" />
+            <LanguageOption code="mr" title="मराठी" />
           </View>
         </View>
         <Pressable
-          style={[styles.editButton, { backgroundColor: primaryColor }]}
-          onPress={() => console.log("Edit pressed")}
+          style={[styles.logoutButton, { backgroundColor: cardBgColor }]}
+          onPress={handleLogout}
         >
-          <ThemedText style={styles.editButtonText}>{t('editProfile')}</ThemedText>
+          <MaterialCommunityIcons name="logout" size={22} color="#FF4444" />
+          <ThemedText style={styles.logoutText}>{t('logout')}</ThemedText>
         </Pressable>
-      </ThemedView>
-
-      {/* Personality Section */}
-      <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-        <ThemedText style={styles.cardTitle}>{t('spendingPersonality')} 🎭</ThemedText>
-        <ThemedText style={styles.description}>
-          {profileData.personalityDescription}
-        </ThemedText>
-      </ThemedView>
-
-      {/* Goals Section */}
-      <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-        <ThemedText style={styles.cardTitle}>{t('moneyGoals')} 🎯</ThemedText>
-        <View style={styles.goalProgress}>
-          <ThemedText style={styles.goalText}>
-            {profileData.goal.item} – {(profileData.goal.saved / profileData.goal.total * 100).toFixed(0)}% saved
-          </ThemedText>
-          <ThemedText style={[styles.amount, { color: primaryColor }]}>
-            ₹{profileData.goal.saved.toLocaleString()} of ₹{profileData.goal.total.toLocaleString()}
-          </ThemedText>
-          <View style={styles.progressBar}>
-            <View
-              style={[styles.progressFill, { 
-                backgroundColor: primaryColor,
-                width: `${(profileData.goal.saved / profileData.goal.total * 100)}%`
-              }]}
-            />
-          </View>
-        </View>
-        <View style={styles.rewardSection}>
-          <ThemedText style={styles.rewardText}>🎁 Earned: {profileData.rewards}</ThemedText>
-        </View>
-      </ThemedView>
-
-      {/* Settings Section */}
-      <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-        <ThemedText style={styles.cardTitle}>{t('settings')} ⚙️</ThemedText>
-        
-        {/* Language Section */}
-        <View style={styles.settingSection}>
-          <ThemedText style={styles.settingTitle}>{t('language')}</ThemedText>
-          <LanguageSelector />
-        </View>
-
-        <View style={styles.settingItem}>
-          <ThemedText>{t('smsAccess')}</ThemedText>
-          <Switch
-            value={profileData.smsAccess}
-            onValueChange={(value) => 
-              setProfileData(prev => ({ ...prev, smsAccess: value }))
-            }
-            trackColor={{ false: "#767577", true: primaryColor }}
-          />
-        </View>
-        <View style={styles.settingItem}>
-          <ThemedText>{t('upiSync')}</ThemedText>
-          <Switch
-            value={profileData.upiSync}
-            onValueChange={(value) => 
-              setProfileData(prev => ({ ...prev, upiSync: value }))
-            }
-            trackColor={{ false: "#767577", true: primaryColor }}
-          />
-        </View>
-      </ThemedView>
-
-      {/* Insights Section */}
-      <ThemedView style={[styles.card, { backgroundColor: cardBgColor }]}>
-        <ThemedText style={styles.cardTitle}>{t('insights')} 💡</ThemedText>
-        {profileData.insights.map((insight, index) => (
-          <View key={index} style={styles.insightItem}>
-            <ThemedText style={styles.insightText}>{insight}</ThemedText>
-          </View>
-        ))}
-      </ThemedView>
-    </ScrollView>
+      </ScrollView>
+    </ThemedView>
   );
 }
 
@@ -156,116 +118,103 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    padding: 20,
     paddingTop: 60,
+    paddingBottom: 30,
+    paddingHorizontal: 20,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
   },
-  avatarSection: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
+  profileInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    justifyContent: "center",
-    alignItems: "center",
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    backgroundColor: '#FFFFFF20',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  nameSection: {
-    marginLeft: 15,
-    flex: 1,
+  avatarText: {
+    fontSize: 28,
+    fontWeight: '600',
+    color: '#FFFFFF',
   },
-  name: {
+  userInfo: {
+    marginLeft: 16,
+  },
+  username: {
     fontSize: 24,
-    fontWeight: "bold",
+    fontWeight: '600',
+    color: '#FFFFFF',
   },
-  personality: {
-    fontSize: 16,
-    opacity: 0.7,
+  phoneNumber: {
+    fontSize: 14,
+    color: '#FFFFFF90',
+    marginTop: 4,
   },
-  editButton: {
-    padding: 12,
-    borderRadius: 25,
-    alignItems: "center",
-  },
-  editButtonText: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "#FFFFFF",
+  content: {
+    flex: 1,
+    padding: 16,
   },
   card: {
-    borderRadius: 15,
-    padding: 20,
-    margin: 10,
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    elevation: 3,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
   },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 15,
-  },
-  description: {
+  sectionTitle: {
     fontSize: 16,
-    opacity: 0.8,
-    lineHeight: 22,
+    fontWeight: '600',
+    marginBottom: 16,
+    opacity: 0.7,
   },
-  goalProgress: {
-    marginVertical: 10,
+  languageGrid: {
+    borderRadius: 12,
+    overflow: 'hidden',
   },
-  goalText: {
+  languageOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 16,
+  },
+  languageText: {
     fontSize: 16,
-    marginBottom: 5,
-  },
-  amount: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  progressBar: {
-    height: 8,
-    backgroundColor: "#E5E7EB",
-    borderRadius: 4,
-    overflow: "hidden",
-  },
-  progressFill: {
-    height: "100%",
-    borderRadius: 4,
-  },
-  rewardSection: {
-    marginTop: 15,
-    padding: 10,
-    backgroundColor: "#F3F4F6",
-    borderRadius: 8,
-  },
-  rewardText: {
-    fontSize: 14,
-  },
-  settingSection: {
-    marginBottom: 20,
-  },
-  settingTitle: {
-    fontSize: 16,
-    fontWeight: "600",
-    marginBottom: 10,
   },
   settingItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
   },
-  insightItem: {
-    paddingVertical: 8,
+  settingBorder: {
     borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
+    borderBottomColor: '#33333320',
   },
-  insightText: {
-    fontSize: 14,
-    opacity: 0.8,
+  settingIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  settingText: {
+    flex: 1,
+    fontSize: 16,
+  },
+  logoutButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16,
+    borderRadius: 12,
+    marginTop: 8,
+  },
+  logoutText: {
+    marginLeft: 8,
+    fontSize: 16,
+    color: '#FF4444',
+    fontWeight: '500',
   },
 });
