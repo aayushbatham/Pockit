@@ -5,7 +5,6 @@
 
 **Pockit** is a modern, machine learning-powered personal finance app tailored for India. From chaotic UPI spends to festival splurges, Pockit gets it. We're here to decode your financial habits, forecast future expenses, and help you achieve your financial goals.
 
-Special Thanks to Mahi Patel (backend) , Prathmesh Gawade (fs) and Keshav Tejra (ml) for their contribution 
 ---
 
 ![Pockit App](assets/mockup.png)
